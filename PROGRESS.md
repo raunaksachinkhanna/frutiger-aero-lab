@@ -39,8 +39,14 @@ resume from here without re-deriving context.
   instructions. 3 component tests, passing. Builds clean.
 - **Deploy workflow**: `.github/workflows/deploy.yml` builds all
   workspaces and assembles `lab-site` (root) + `demo-site`
-  (`/aeroreddit/`) into one Pages artifact. **Not yet pushed/run** — see
-  Next steps.
+  (`/aeroreddit/`) into one Pages artifact. **Pushed and verified**: the
+  first run failed in CI (`npm ci` on Linux hit a known npm
+  optional-dependencies lockfile bug, npm/cli#4828 — the committed
+  lockfile was missing Linux-x64 native bindings for Vite 8's bundler);
+  regenerating `package-lock.json` fixed it. Both URLs confirmed live via
+  `curl` (HTTP 200):
+  - https://raunaksachinkhanna.github.io/frutiger-aero-lab/
+  - https://raunaksachinkhanna.github.io/frutiger-aero-lab/aeroreddit/
 - **Docs**: `docs/architecture.md`, `docs/roadmap.md`, `docs/research.md`
   updated; `docs/extension-reddit-notes.md` added (the Shadow DOM
   explanation + how to verify/extend selectors); root `README.md` and
@@ -91,14 +97,14 @@ npm run format:check (repo root)           → clean
 
 ## Next steps, in priority order
 
-1. **Push this work and verify the Pages deploy workflow actually
-   succeeds** (it's written but untested end-to-end).
-2. **Sideload-test on real Reddit** (see `docs/extension-reddit-notes.md`
+1. **Sideload-test on real Reddit** (see `docs/extension-reddit-notes.md`
    step-by-step) — this is the highest-value remaining task; it will
    either confirm the current approach or reveal what needs fixing.
-3. Take a real screenshot/recording of the demo site for the README.
-4. Gather community feedback (the original Phase-1 goal, still open).
-5. Everything in `docs/roadmap.md` Phase 2/3.
+2. Take a real screenshot/recording of the live demo site for the README
+   (the in-app browser pane used to build this was unavailable both for
+   localhost and for the live URL by the end of this session).
+3. Gather community feedback (the original Phase-1 goal, still open).
+4. Everything in `docs/roadmap.md` Phase 2/3.
 
 ## How to resume if this session is interrupted
 
