@@ -1,0 +1,33 @@
+/**
+ * Best-effort, page-level theming for www.reddit.com ("shreddit").
+ * Honest scope: most interactive UI (posts, votes, comments) lives inside
+ * Shadow DOM custom elements and is NOT reachable from here. This file
+ * only touches light-DOM surfaces that are confirmed reachable: the html/
+ * body background, the document scrollbar, and shreddit-app's own host
+ * element box (its *content* is shadow-rooted, but the host element
+ * itself is a normal light-DOM node and can be sized/positioned/given a
+ * background through the shadow boundary).
+ */
+html[data-aero-site='new'] body {
+  background: var(--aero-bg-gradient) fixed !important;
+}
+
+html[data-aero-site='new'] ::-webkit-scrollbar {
+  width: 14px;
+}
+html[data-aero-site='new'] ::-webkit-scrollbar-thumb {
+  background: var(--aero-scrollbar-thumb);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+/*
+ * CSS custom properties DO inherit across shadow boundaries (unlike
+ * selectors/rules). If shreddit's internal components happen to read
+ * standard Reddit theme tokens, setting them here could reach further —
+ * but we have not verified shreddit's internal variable names in this
+ * environment (reddit.com was unreachable from the dev sandbox used to
+ * build this), so we deliberately do NOT fabricate variable names here.
+ * See docs/extension-reddit-notes.md for how to find and add them.
+ */

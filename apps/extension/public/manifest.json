@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "AeroReddit",
+  "short_name": "AeroReddit",
+  "version": "0.1.0",
+  "description": "Restyles Reddit with a Frutiger Aero / Windows Vista Aero Glass aesthetic. Vista Glass, Frutiger Eco, and Dark Aero themes with configurable animations.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "AeroReddit"
+  },
+  "options_page": "options.html",
+  "permissions": ["storage"],
+  "host_permissions": ["https://www.reddit.com/*", "https://old.reddit.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.reddit.com/*", "https://old.reddit.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

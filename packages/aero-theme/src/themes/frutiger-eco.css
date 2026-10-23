@@ -1,0 +1,23 @@
+/* Frutiger Eco — vibrant green/blue, nature-inspired, bright and playful */
+[data-aero-theme='frutiger-eco'] {
+  --aero-bg-gradient: linear-gradient(180deg, #d7f3e3 0%, #eafcf0 40%, #d8f0fb 100%);
+  --aero-surface-bg: rgba(255, 255, 255, 0.42);
+  --aero-surface-bg-strong: rgba(255, 255, 255, 0.64);
+  --aero-surface-border: rgba(255, 255, 255, 0.85);
+  --aero-surface-highlight: rgba(255, 255, 255, 0.95);
+  --aero-blur: 14px;
+  --aero-accent: #2fb872;
+  --aero-accent-strong: #0e7a4f;
+  --aero-accent-2: #1f8fe0;
+  --aero-text: #0c2a1c;
+  --aero-text-muted: #3f6b55;
+  --aero-link: #0e7a4f;
+  --aero-shadow: 0 10px 26px rgba(14, 122, 79, 0.2);
+  --aero-shadow-lifted: 0 18px 44px rgba(14, 122, 79, 0.28);
+  --aero-radius-sm: 10px;
+  --aero-radius-md: 16px;
+  --aero-radius-lg: 26px;
+  --aero-upvote: #2fb872;
+  --aero-downvote: #e0607c;
+  --aero-scrollbar-thumb: linear-gradient(180deg, #9be8be, #2fb872);
+}

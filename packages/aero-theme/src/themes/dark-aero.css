@@ -1,0 +1,23 @@
+/* Dark Aero — deep ocean blues, glowing cyan accents, restrained neon */
+[data-aero-theme='dark-aero'] {
+  --aero-bg-gradient: linear-gradient(180deg, #06111f 0%, #0a1f33 55%, #07263a 100%);
+  --aero-surface-bg: rgba(18, 36, 54, 0.55);
+  --aero-surface-bg-strong: rgba(22, 44, 64, 0.72);
+  --aero-surface-border: rgba(120, 220, 255, 0.28);
+  --aero-surface-highlight: rgba(140, 230, 255, 0.18);
+  --aero-blur: 20px;
+  --aero-accent: #39d6ff;
+  --aero-accent-strong: #0ea5c7;
+  --aero-accent-2: #6ae8b8;
+  --aero-text: #e7f6ff;
+  --aero-text-muted: #94b4c4;
+  --aero-link: #39d6ff;
+  --aero-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --aero-shadow-lifted: 0 20px 54px rgba(0, 0, 0, 0.55);
+  --aero-radius-sm: 8px;
+  --aero-radius-md: 14px;
+  --aero-radius-lg: 22px;
+  --aero-upvote: #ff6a3d;
+  --aero-downvote: #6ae8ff;
+  --aero-scrollbar-thumb: linear-gradient(180deg, #39d6ff, #0ea5c7);
+}

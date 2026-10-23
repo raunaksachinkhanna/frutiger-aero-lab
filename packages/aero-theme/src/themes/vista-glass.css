@@ -1,0 +1,23 @@
+/* Vista Glass — classic blue Aero Glass, glossy chrome, atmospheric sky */
+[data-aero-theme='vista-glass'] {
+  --aero-bg-gradient: linear-gradient(180deg, #bcdcf4 0%, #e8f4fc 45%, #dff0e4 100%);
+  --aero-surface-bg: rgba(255, 255, 255, 0.38);
+  --aero-surface-bg-strong: rgba(255, 255, 255, 0.58);
+  --aero-surface-border: rgba(255, 255, 255, 0.8);
+  --aero-surface-highlight: rgba(255, 255, 255, 0.92);
+  --aero-blur: 16px;
+  --aero-accent: #1f8fe0;
+  --aero-accent-strong: #0b5fa8;
+  --aero-accent-2: #2fb872;
+  --aero-text: #0a2233;
+  --aero-text-muted: #4c6475;
+  --aero-link: #0b5fa8;
+  --aero-shadow: 0 10px 28px rgba(8, 54, 97, 0.22);
+  --aero-shadow-lifted: 0 18px 48px rgba(8, 54, 97, 0.3);
+  --aero-radius-sm: 8px;
+  --aero-radius-md: 14px;
+  --aero-radius-lg: 22px;
+  --aero-upvote: #ff6a3d;
+  --aero-downvote: #6a8cff;
+  --aero-scrollbar-thumb: linear-gradient(180deg, #8fd0ff, #1f8fe0);
+}

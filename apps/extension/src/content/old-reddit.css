@@ -1,0 +1,127 @@
+/**
+ * Full Aero Glass theming for old.reddit.com.
+ * old.reddit.com is plain light-DOM HTML — every selector below targets
+ * real, long-stable old.reddit class names (used by subreddit CSS themes
+ * for over a decade), so this is the surface where AeroReddit can
+ * genuinely restyle the whole page, not just its chrome.
+ */
+html[data-aero-site='old'] body {
+  background: var(--aero-bg-gradient) fixed !important;
+  color: var(--aero-text);
+}
+
+html[data-aero-site='old'] #header {
+  background: color-mix(
+    in srgb,
+    var(--aero-surface-bg-strong) calc(var(--aero-opacity-scale, 1) * 100%),
+    transparent
+  ) !important;
+  backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1)));
+  -webkit-backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1)));
+  border-bottom: 1px solid var(--aero-surface-border) !important;
+  box-shadow: var(--aero-shadow) !important;
+}
+
+html[data-aero-site='old'] #header-bottom-left .tabmenu li a {
+  border-radius: var(--aero-radius-sm);
+  color: var(--aero-text) !important;
+}
+
+html[data-aero-site='old'] #header-bottom-left .tabmenu li.selected a {
+  background: var(--aero-surface-bg-strong) !important;
+  box-shadow: var(--aero-shadow);
+}
+
+html[data-aero-site='old'] .content {
+  background: transparent !important;
+}
+
+html[data-aero-site='old'] .thing {
+  background: color-mix(
+    in srgb,
+    var(--aero-surface-bg) calc(var(--aero-opacity-scale, 1) * 100%),
+    transparent
+  ) !important;
+  border: 1px solid var(--aero-surface-border) !important;
+  border-radius: var(--aero-radius-md) !important;
+  box-shadow: var(--aero-shadow);
+  backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1) * 0.6));
+  -webkit-backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1) * 0.6));
+  margin-bottom: 0.5em !important;
+  transition: transform 0.15s ease;
+}
+
+html[data-aero-site='old'][data-aero-density='compact'] .thing {
+  margin-bottom: 0.2em !important;
+}
+
+html[data-aero-site='old'] .thing a.title {
+  color: var(--aero-link) !important;
+  font-weight: 600;
+}
+
+html[data-aero-site='old'] .thing .tagline,
+html[data-aero-site='old'] .thing .tagline a {
+  color: var(--aero-text-muted) !important;
+}
+
+html[data-aero-site='old'] .midcol .arrow.up {
+  filter: hue-rotate(0deg);
+}
+html[data-aero-site='old'] .midcol .score.likes {
+  color: var(--aero-upvote) !important;
+}
+html[data-aero-site='old'] .midcol .score.dislikes {
+  color: var(--aero-downvote) !important;
+}
+
+html[data-aero-site='old'] .side .spacer .titlebox,
+html[data-aero-site='old'] .side .spacer {
+  background: var(--aero-surface-bg) !important;
+  border: 1px solid var(--aero-surface-border) !important;
+  border-radius: var(--aero-radius-md) !important;
+  box-shadow: var(--aero-shadow);
+}
+
+html[data-aero-site='old'] .commentarea .comment {
+  border-left: 2px solid var(--aero-surface-border);
+}
+
+html[data-aero-site='old'] .usertext-body .md {
+  background: var(--aero-surface-bg) !important;
+  border-radius: var(--aero-radius-sm);
+  padding: 0.4em 0.6em;
+}
+
+html[data-aero-site='old'] .commentarea .usertext textarea,
+html[data-aero-site='old'] input[type='text'],
+html[data-aero-site='old'] input[type='password'] {
+  background: var(--aero-surface-bg-strong) !important;
+  border: 1px solid var(--aero-surface-border) !important;
+  border-radius: var(--aero-radius-sm) !important;
+}
+
+html[data-aero-site='old'] .btn,
+html[data-aero-site='old'] button.btn,
+html[data-aero-site='old'] .styled-button,
+html[data-aero-site='old'] input[type='submit'] {
+  background: linear-gradient(
+    180deg,
+    var(--aero-accent) 0%,
+    var(--aero-accent-strong) 100%
+  ) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--aero-radius-sm) !important;
+  box-shadow: var(--aero-shadow);
+}
+
+html[data-aero-site='old'] ::-webkit-scrollbar {
+  width: 14px;
+}
+html[data-aero-site='old'] ::-webkit-scrollbar-thumb {
+  background: var(--aero-scrollbar-thumb);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}

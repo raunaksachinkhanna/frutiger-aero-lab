@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+  background: #0a2233;
+}
+
+.options-page {
+  display: flex;
+  justify-content: center;
+}
