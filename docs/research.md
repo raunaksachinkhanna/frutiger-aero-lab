@@ -32,5 +32,11 @@ shipping a generic skin over something that already exists.
 
 ## Log
 
-_No findings recorded yet. Entries will be added here, dated, as feedback
-comes in — not before._
+**2026-10-24 — Direction chosen: AeroReddit.** The maintainer decided to
+proceed with a Reddit-theming browser extension (AeroReddit) as the first
+product direction, rather than continuing open-ended discovery. This was a
+maintainer decision based on enthusiasm for the concept, not a documented
+round of community feedback — no subreddit/Discord outreach has happened
+yet. Community feedback gathering (the original plan for this phase) is
+still open and tracked in `roadmap.md`; findings from it will be logged
+here as they come in.

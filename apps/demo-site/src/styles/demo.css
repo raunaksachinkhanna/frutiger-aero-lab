@@ -1,0 +1,72 @@
+@import 'aero-theme/src/themes/vista-glass.css';
+@import 'aero-theme/src/themes/frutiger-eco.css';
+@import 'aero-theme/src/themes/dark-aero.css';
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  min-height: 100vh;
+}
+#root {
+  min-height: 100vh;
+}
+
+.demo-shell {
+  position: relative;
+  min-height: 100vh;
+  background: var(--aero-bg-gradient);
+  color: var(--aero-text);
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+  overflow-x: clip;
+}
+
+.demo-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+a {
+  color: var(--aero-link);
+}
+
+.aero-glass-surface {
+  background: var(--aero-surface-bg);
+  border: 1px solid var(--aero-surface-border);
+  border-radius: var(--aero-radius-lg);
+  box-shadow: var(--aero-shadow);
+  backdrop-filter: blur(var(--aero-blur));
+  -webkit-backdrop-filter: blur(var(--aero-blur));
+}
+
+.demo-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px;
+  font-size: 0.8rem;
+  color: var(--aero-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

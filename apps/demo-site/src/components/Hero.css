@@ -1,0 +1,73 @@
+.hero {
+  text-align: center;
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.hero__orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #fff,
+    var(--aero-accent) 55%,
+    var(--aero-accent-strong)
+  );
+  box-shadow: var(--aero-shadow-lifted);
+}
+
+.hero__eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--aero-text-muted);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+}
+
+.hero__tagline {
+  max-width: 46ch;
+  color: var(--aero-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.hero__button {
+  appearance: none;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--aero-surface-border);
+  background: var(--aero-surface-bg-strong);
+  color: var(--aero-text);
+  box-shadow: var(--aero-shadow);
+  transition: transform 0.15s ease;
+}
+.hero__button:hover {
+  transform: translateY(-1px);
+}
+.hero__button--primary {
+  background: linear-gradient(180deg, var(--aero-accent), var(--aero-accent-strong));
+  color: #fff;
+  border-color: transparent;
+}

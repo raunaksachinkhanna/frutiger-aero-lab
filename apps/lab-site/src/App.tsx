@@ -18,25 +18,20 @@ function App() {
         <h1>Frutiger Aero Lab</h1>
         <p className="hero-panel__tagline">
           An open-source exploration of the Frutiger Aero design era — glossy glass,
-          vibrant blue and green, and the optimistic tech aesthetic of the mid-2000s. We
-          haven't picked the product yet; that's the point.
+          vibrant blue and green, and the optimistic tech aesthetic of the mid-2000s. Our
+          first product direction: AeroReddit, a browser extension that reskins Reddit.
         </p>
         <div className="hero-panel__actions">
+          <a className="aero-button aero-button--primary" href="./aeroreddit/">
+            Try the AeroReddit demo
+          </a>
           <a
-            className="aero-button aero-button--primary"
+            className="aero-button aero-button--secondary"
             href={REPO_URL}
             target="_blank"
             rel="noreferrer"
           >
             View on GitHub
-          </a>
-          <a
-            className="aero-button aero-button--secondary"
-            href={`${REPO_URL}/blob/main/docs/research.md`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read the research notes
           </a>
         </div>
       </GlassPanel>
@@ -44,26 +39,26 @@ function App() {
       <div className="info-grid">
         <GlassPanel className="info-card">
           <CardIcon kind="research" />
-          <h2>Research, not assumptions</h2>
+          <h2>AeroReddit</h2>
           <p>
-            We're collecting feedback from the Frutiger Aero community to find something
-            people would actually use, before committing to a specific product.
+            A browser extension that reskins Reddit in Frutiger Aero — Vista Glass,
+            Frutiger Eco, and Dark Aero themes, with a live interactive demo.
           </p>
         </GlassPanel>
         <GlassPanel className="info-card">
           <CardIcon kind="roadmap" />
-          <h2>Phased roadmap</h2>
+          <h2>Honest scope</h2>
           <p>
-            Discovery first, then a focused MVP, then testing and release. See{' '}
-            <code>docs/roadmap.md</code> for the current plan.
+            Full theming on old.reddit.com; page-level atmosphere on www.reddit.com, whose
+            UI lives behind Shadow DOM. See <code>docs/roadmap.md</code>.
           </p>
         </GlassPanel>
         <GlassPanel className="info-card">
           <CardIcon kind="architecture" />
-          <h2>Built to last</h2>
+          <h2>Monorepo foundation</h2>
           <p>
-            A strict, typed React foundation with linting, formatting, and tests from day
-            one — see <code>docs/architecture.md</code>.
+            npm workspaces sharing a theme package across the extension, the demo site,
+            and this lab site — see <code>docs/architecture.md</code>.
           </p>
         </GlassPanel>
       </div>

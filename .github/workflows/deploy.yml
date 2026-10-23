@@ -25,9 +25,15 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Assemble combined Pages site
+        run: |
+          mkdir -p site
+          cp -r apps/lab-site/dist/. site/
+          mkdir -p site/aeroreddit
+          cp -r apps/demo-site/dist/. site/aeroreddit/
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: site
 
   deploy:
     needs: build

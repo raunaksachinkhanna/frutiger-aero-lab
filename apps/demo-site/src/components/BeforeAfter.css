@@ -1,0 +1,45 @@
+.before-after {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.before-after__stage {
+  position: relative;
+  border-radius: var(--aero-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--aero-shadow-lifted);
+}
+
+.before-after__layer {
+  position: relative;
+}
+.before-after__layer:last-child {
+  position: absolute;
+  inset: 0;
+}
+
+.before-after__labels {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.before-after__labels span {
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.before-after__slider {
+  width: 100%;
+  accent-color: var(--aero-accent);
+}
