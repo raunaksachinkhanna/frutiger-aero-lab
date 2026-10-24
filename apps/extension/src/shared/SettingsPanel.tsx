@@ -1,6 +1,9 @@
+import { useRef, useState } from 'react'
 import {
   ANIMATION_LEVELS,
   THEMES,
+  exportSettingsJson,
+  importSettingsJson,
   type AnimationLevel,
   type ThemeId,
 } from 'aero-theme/src/tokens'
@@ -9,6 +12,29 @@ import './SettingsPanel.css'
 
 export function SettingsPanel({ full = false }: { full?: boolean }) {
   const { settings, ready, update, reset } = useSettings()
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [importError, setImportError] = useState<string | null>(null)
+
+  function handleExport() {
+    const blob = new Blob([exportSettingsJson(settings)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'aeroreddit-settings.json'
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  async function handleImportFile(file: File) {
+    const text = await file.text()
+    const result = importSettingsJson(text)
+    if (!result) {
+      setImportError("That file isn't a valid AeroReddit settings export.")
+      return
+    }
+    setImportError(null)
+    update(result)
+  }
 
   return (
     <div
@@ -132,6 +158,29 @@ export function SettingsPanel({ full = false }: { full?: boolean }) {
                 </button>
               ))}
             </div>
+          </section>
+          <section className="aero-panel__section">
+            <h2>Backup</h2>
+            <div className="aero-backup-row">
+              <button type="button" onClick={handleExport}>
+                Export settings
+              </button>
+              <button type="button" onClick={() => fileInputRef.current?.click()}>
+                Import settings
+              </button>
+            </div>
+            {importError && <p className="aero-import-error">{importError}</p>}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="application/json"
+              className="aero-visually-hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (file) void handleImportFile(file)
+                e.target.value = ''
+              }}
+            />
           </section>
         </>
       )}

@@ -115,3 +115,41 @@ export function sanitizeSettings(value: unknown): AeroSettings {
   }
   return merged
 }
+
+const EXPORT_SCHEMA_VERSION = 1
+
+interface SettingsExportFile {
+  aeroRedditSettings: true
+  schemaVersion: number
+  settings: AeroSettings
+}
+
+/** Produces a JSON string for the user to save — never executed, just data. */
+export function exportSettingsJson(settings: AeroSettings): string {
+  const payload: SettingsExportFile = {
+    aeroRedditSettings: true,
+    schemaVersion: EXPORT_SCHEMA_VERSION,
+    settings: sanitizeSettings(settings),
+  }
+  return JSON.stringify(payload, null, 2)
+}
+
+/**
+ * Parses a settings export. Only ever JSON.parse()s the input — never eval,
+ * never Function(), nothing that could execute code from an imported file.
+ * Returns null (never throws) on any malformed input; the caller decides
+ * how to surface that. The result is always run through sanitizeSettings,
+ * so a tampered or hand-edited file can at worst set known-safe fields.
+ */
+export function importSettingsJson(raw: string): AeroSettings | null {
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(raw)
+  } catch {
+    return null
+  }
+  if (typeof parsed !== 'object' || parsed === null) return null
+  const file = parsed as Record<string, unknown>
+  const settingsCandidate = file.aeroRedditSettings === true ? file.settings : parsed
+  return sanitizeSettings(settingsCandidate)
+}

@@ -47,6 +47,13 @@ resume from here without re-deriving context.
   `curl` (HTTP 200):
   - https://raunaksachinkhanna.github.io/frutiger-aero-lab/
   - https://raunaksachinkhanna.github.io/frutiger-aero-lab/aeroreddit/
+- **Theme export/import**: `exportSettingsJson`/`importSettingsJson` in
+  `packages/aero-theme/src/tokens.ts` — JSON only, `JSON.parse` never
+  `eval`, always routed through `sanitizeSettings` so a hand-edited or
+  malicious file can't set anything outside the known schema. 5 new
+  tests (round-trip, invalid JSON, tampered values, prototype-pollution
+  attempt). Wired into the options page as a "Backup" section (Export /
+  Import buttons).
 - **Docs**: `docs/architecture.md`, `docs/roadmap.md`, `docs/research.md`
   updated; `docs/extension-reddit-notes.md` added (the Shadow DOM
   explanation + how to verify/extend selectors); root `README.md` and
@@ -69,28 +76,37 @@ npm run format:check (repo root)           → clean
 
 ## Known limitations (stated honestly, not hidden)
 
-1. **No live Reddit testing.** `reddit.com` and `old.reddit.com` were
-   both unreachable (navigation denied) from the browser available in
-   this dev sandbox. All Reddit-targeting CSS is based on well-known,
+1. **No live Reddit testing — actively attempted twice, both blocked by
+   tooling, not skipped.** First attempt: `reddit.com`/`old.reddit.com`
+   were unreachable (navigation denied) from this session's built-in
+   browser pane while writing the CSS. Second attempt (this session,
+   later): tried again via the built-in pane (still denied/unavailable —
+   `tabs_create` and `navigate` both failed) and via Claude-in-Chrome
+   (the Chrome extension reported "not connected"). Neither is something
+   retrying fixes — both are environment/connection issues outside this
+   session's control. All Reddit-targeting CSS is based on well-known,
    publicly documented facts about Reddit's markup (old Reddit's stable
    class names; new Reddit's shreddit/Shadow-DOM architecture), **not**
    on live inspection. The extension has never been sideloaded into a
-   real Chrome profile and pointed at Reddit. This is the single most
-   important thing to do before trusting the "it works" claims above —
-   see `docs/extension-reddit-notes.md` for exactly how to verify it.
-2. **No visual screenshot of the demo site was captured in this session**
-   — the in-app browser pane became unavailable partway through (tab
-   creation started failing). The demo site's correctness rests on
-   passing typecheck/tests/build, not a visual check. Run
-   `npm run dev -w aeroreddit-demo` and open it yourself to see it.
-3. **Firefox support**: not started.
-4. **Theme JSON export/import**: not started (mentioned as a nice-to-have
-   in the original brief, deliberately deferred).
-5. **No CI workflow**: skipped per explicit maintainer instruction (local
-   checks only).
-6. **No extension icons**: the manifest has no `icons` field, so Chrome
-   shows a default puzzle-piece icon. Cosmetic, deferred.
-7. **No Playwright / E2E tests**: only Vitest unit/component tests exist.
+   real Chrome profile and pointed at Reddit. This remains the single
+   most important open item — see `docs/extension-reddit-notes.md` for
+   exactly how to verify it yourself (it's a 5-minute manual check).
+2. **No visual screenshot of the demo site.** Same tooling blockage as
+   above — attempted against both localhost and the live Pages URL, in
+   both the built-in pane and Claude-in-Chrome, across two separate
+   attempts in this session. The demo site's correctness rests on
+   passing typecheck/tests/build (and a working CI deploy), not a visual
+   check. Run `npm run dev -w aeroreddit-demo` and open it yourself, or
+   visit the live URL.
+3. **Firefox support**: not started — explicitly deferred by the
+   maintainer's own priority order.
+4. **No CI lint/test workflow**: skipped per explicit maintainer
+   instruction (local checks only).
+5. **No extension icons**: the manifest has no `icons` field, so Chrome
+   shows a default puzzle-piece icon. Generating real PNGs needs either a
+   browser (unavailable) or a native image-encoding dependency, which
+   isn't worth adding for a cosmetic default-icon fallback. Deferred.
+6. **No Playwright / E2E tests**: only Vitest unit/component tests exist.
    Given (1), E2E tests against fixture HTML would test fixtures, not
    reality, so this was deprioritized in favor of being honest about (1)
    rather than producing tests that look more thorough than they are.
@@ -98,13 +114,14 @@ npm run format:check (repo root)           → clean
 ## Next steps, in priority order
 
 1. **Sideload-test on real Reddit** (see `docs/extension-reddit-notes.md`
-   step-by-step) — this is the highest-value remaining task; it will
-   either confirm the current approach or reveal what needs fixing.
+   step-by-step) — the highest-value remaining task, and the one this
+   session could not complete due to browser-tool unavailability (see
+   Known limitations above). This needs either a working browser tool in
+   a future session, or the maintainer doing the 5-minute manual check.
 2. Take a real screenshot/recording of the live demo site for the README
-   (the in-app browser pane used to build this was unavailable both for
-   localhost and for the live URL by the end of this session).
+   — same blocker.
 3. Gather community feedback (the original Phase-1 goal, still open).
-4. Everything in `docs/roadmap.md` Phase 2/3.
+4. Everything else in `docs/roadmap.md` Phase 2/3 (icons, Firefox).
 
 ## How to resume if this session is interrupted
 

@@ -38,8 +38,11 @@ a claim about untested behavior.
 - [ ] Sideload-test the built extension against live Reddit. **Not done**
       — reddit.com was unreachable from the dev sandbox used to build
       this; needs manual verification. See `PROGRESS.md`.
+- [x] Theme export/import as JSON: `exportSettingsJson`/`importSettingsJson`
+      in `packages/aero-theme` (5 tests — round-trip, malformed JSON,
+      tampered/malicious input, no code execution), wired into the
+      options page's new "Backup" section.
 - [ ] Firefox support — deferred, not started.
-- [ ] Theme export/import as JSON — deferred, not started.
 
 ## Phase 2 — Polish & validation
 

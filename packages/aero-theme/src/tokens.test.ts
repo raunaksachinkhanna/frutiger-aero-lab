@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { DEFAULT_SETTINGS, isValidSettings, sanitizeSettings } from './tokens'
+import {
+  DEFAULT_SETTINGS,
+  exportSettingsJson,
+  importSettingsJson,
+  isValidSettings,
+  sanitizeSettings,
+} from './tokens'
 
 describe('isValidSettings', () => {
   it('accepts the default settings', () => {
@@ -48,5 +54,47 @@ describe('sanitizeSettings', () => {
         extraneous: 'ignored',
       }),
     ).not.toThrow()
+  })
+})
+
+describe('exportSettingsJson / importSettingsJson', () => {
+  it('round-trips valid settings', () => {
+    const custom = { ...DEFAULT_SETTINGS, theme: 'dark-aero' as const, glassOpacity: 0.5 }
+    const json = exportSettingsJson(custom)
+    expect(importSettingsJson(json)).toEqual(custom)
+  })
+
+  it('also accepts a bare settings object (not wrapped in the export envelope)', () => {
+    const bare = JSON.stringify({ theme: 'frutiger-eco', glassOpacity: 0.8 })
+    const result = importSettingsJson(bare)
+    expect(result?.theme).toBe('frutiger-eco')
+    expect(result?.glassOpacity).toBe(0.8)
+  })
+
+  it('returns null, never throws, for invalid JSON', () => {
+    expect(importSettingsJson('not json at all {{{')).toBeNull()
+    expect(importSettingsJson('null')).toBeNull()
+    expect(importSettingsJson('"just a string"')).toBeNull()
+    expect(importSettingsJson('42')).toBeNull()
+  })
+
+  it('sanitizes a tampered export rather than trusting it wholesale', () => {
+    const tampered = JSON.stringify({
+      aeroRedditSettings: true,
+      schemaVersion: 1,
+      settings: { theme: 'not-a-real-theme', glassOpacity: 999, enabled: 'yes' },
+    })
+    const result = importSettingsJson(tampered)
+    expect(result).toEqual(DEFAULT_SETTINGS)
+  })
+
+  it('never evaluates the imported content as code', () => {
+    const malicious = JSON.stringify({
+      theme: 'vista-glass',
+      __proto__: { polluted: true },
+      toString: '() => { throw new Error("pwned") }',
+    })
+    expect(() => importSettingsJson(malicious)).not.toThrow()
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined()
   })
 })
