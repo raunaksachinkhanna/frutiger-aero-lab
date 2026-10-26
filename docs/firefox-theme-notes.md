@@ -66,6 +66,19 @@ available in the sandbox this was built in.
    trip).
 4. Update this file and `PROGRESS.md` with what you actually found.
 
+## Cross-device sync
+
+The chosen theme (including `'auto'`) is persisted via `storage.js`'s
+`getThemeChoice()`/`setThemeChoice()`, which prefer
+`browser.storage.sync` (so the choice follows a signed-in user across
+devices) and fall back to `browser.storage.local` when sync throws (no
+Firefox Account signed in, sync disabled by policy, etc.) or has no
+value yet — in which case the local value is also opportunistically
+migrated into sync. Every write goes to both stores, so local always
+has a current mirror even once sync is working. Covered by
+`storage.test.mjs` with a mock `browser` global (12/12 tests passing
+total) — this part doesn't need a real Firefox profile to verify.
+
 ## The "Auto" option
 
 `AUTO_THEME_ID` (`'auto'`) is a pseudo-theme-id, selectable in the popup

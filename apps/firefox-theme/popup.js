@@ -1,15 +1,10 @@
 import { AUTO_META, AUTO_THEME_ID, DEFAULT_THEME_ID, THEME_IDS, THEME_META } from './colors.js'
+import { getThemeChoice, setThemeChoice } from './storage.js'
 
-const STORAGE_KEY = 'aeroFoxThemeId'
 const SELECTABLE_IDS = [AUTO_THEME_ID, ...THEME_IDS]
 
 function getMeta(id) {
   return id === AUTO_THEME_ID ? AUTO_META : THEME_META[id]
-}
-
-async function getCurrentThemeId() {
-  const stored = await browser.storage.local.get(STORAGE_KEY)
-  return stored[STORAGE_KEY] ?? DEFAULT_THEME_ID
 }
 
 function renderButtons(container, selectedId, onSelect) {
@@ -32,11 +27,11 @@ function renderButtons(container, selectedId, onSelect) {
 
 async function main() {
   const container = document.getElementById('themes')
-  let selectedId = await getCurrentThemeId()
+  let selectedId = await getThemeChoice(DEFAULT_THEME_ID)
 
   async function handleSelect(id) {
     selectedId = id
-    await browser.storage.local.set({ [STORAGE_KEY]: id })
+    await setThemeChoice(id)
     renderButtons(container, selectedId, handleSelect)
   }
 

@@ -5,8 +5,7 @@ import {
   THEME_IMAGES,
   resolveAutoThemeId,
 } from './colors.js'
-
-const STORAGE_KEY = 'aeroFoxThemeId'
+import { getThemeChoice, onThemeChoiceChanged } from './storage.js'
 
 function prefersDarkScheme() {
   return typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches
@@ -21,24 +20,15 @@ async function applyTheme(themeId) {
   await browser.theme.update({ colors, images })
 }
 
-async function getStoredThemeId() {
-  const stored = await browser.storage.local.get(STORAGE_KEY)
-  return stored[STORAGE_KEY] ?? DEFAULT_THEME_ID
-}
-
 async function init() {
-  await applyTheme(await getStoredThemeId())
+  await applyTheme(await getThemeChoice(DEFAULT_THEME_ID))
 }
 
-browser.storage.onChanged.addListener((changes, area) => {
-  if (area === 'local' && changes[STORAGE_KEY]) {
-    applyTheme(changes[STORAGE_KEY].newValue)
-  }
-})
+onThemeChoiceChanged((themeId) => applyTheme(themeId))
 
 if (typeof matchMedia === 'function') {
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', async () => {
-    if ((await getStoredThemeId()) === AUTO_THEME_ID) {
+    if ((await getThemeChoice(DEFAULT_THEME_ID)) === AUTO_THEME_ID) {
       await applyTheme(AUTO_THEME_ID)
     }
   })
