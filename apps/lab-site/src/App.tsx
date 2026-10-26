@@ -19,11 +19,16 @@ function App() {
         <p className="hero-panel__tagline">
           An open-source exploration of the Frutiger Aero design era — glossy glass,
           vibrant blue and green, and the optimistic tech aesthetic of the mid-2000s. Our
-          first product direction: AeroReddit, a browser extension that reskins Reddit.
+          first product: AeroFox, a Firefox browser theme add-on.
         </p>
         <div className="hero-panel__actions">
-          <a className="aero-button aero-button--primary" href="./aeroreddit/">
-            Try the AeroReddit demo
+          <a
+            className="aero-button aero-button--primary"
+            href={`${REPO_URL}/tree/main/apps/firefox-theme`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Get AeroFox
           </a>
           <a
             className="aero-button aero-button--secondary"
@@ -39,26 +44,26 @@ function App() {
       <div className="info-grid">
         <GlassPanel className="info-card">
           <CardIcon kind="research" />
-          <h2>AeroReddit</h2>
+          <h2>AeroFox</h2>
           <p>
-            A browser extension that reskins Reddit in Frutiger Aero — Vista Glass,
-            Frutiger Eco, and Dark Aero themes, with a live interactive demo.
+            A real Firefox browser theme add-on — Vista Glass, Frutiger Eco, and Dark
+            Aero, live-switchable from the toolbar popup.
           </p>
         </GlassPanel>
         <GlassPanel className="info-card">
           <CardIcon kind="roadmap" />
-          <h2>Honest scope</h2>
+          <h2>Native theming</h2>
           <p>
-            Full theming on old.reddit.com; page-level atmosphere on www.reddit.com, whose
-            UI lives behind Shadow DOM. See <code>docs/roadmap.md</code>.
+            Built on Firefox&apos;s own <code>theme.update()</code> API, not CSS
+            injection — see <code>docs/firefox-theme-notes.md</code>.
           </p>
         </GlassPanel>
         <GlassPanel className="info-card">
           <CardIcon kind="architecture" />
           <h2>Monorepo foundation</h2>
           <p>
-            npm workspaces sharing a theme package across the extension, the demo site,
-            and this lab site — see <code>docs/architecture.md</code>.
+            npm workspaces sharing engineering foundations across this lab site and
+            AeroFox — see <code>docs/architecture.md</code>.
           </p>
         </GlassPanel>
       </div>

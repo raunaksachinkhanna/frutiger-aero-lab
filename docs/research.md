@@ -37,6 +37,13 @@ proceed with a Reddit-theming browser extension (AeroReddit) as the first
 product direction, rather than continuing open-ended discovery. This was a
 maintainer decision based on enthusiasm for the concept, not a documented
 round of community feedback — no subreddit/Discord outreach has happened
-yet. Community feedback gathering (the original plan for this phase) is
-still open and tracked in `roadmap.md`; findings from it will be logged
-here as they come in.
+yet.
+
+**2026-10-26 — AeroReddit cancelled; AeroFox is now the sole product.**
+The maintainer decided to drop AeroReddit entirely (not just deprioritize
+it) and focus exclusively on AeroFox, a native Firefox browser theme.
+`apps/extension`, `apps/demo-site`, and the now-unused
+`packages/aero-theme` shared theme package were removed from the repo.
+Community feedback gathering (the original plan for this phase) is still
+open and tracked in `roadmap.md`; findings from it will be logged here as
+they come in.

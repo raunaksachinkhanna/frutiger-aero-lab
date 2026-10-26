@@ -1,28 +1,24 @@
 # Notes on AeroFox (read before touching the Firefox theme)
 
-AeroFox (`apps/firefox-theme/`) is architecturally different from
-AeroReddit, and it's worth being explicit about why, since it's easy to
-assume both work the same way.
+AeroFox (`apps/firefox-theme/`) is the project's sole product. This
+explains its architecture and what's still unverified.
 
 ## Theme API, not content-script CSS injection
-
-AeroReddit works by injecting a stylesheet into a page's DOM via a
-content script — see
-[`docs/extension-reddit-notes.md`](extension-reddit-notes.md) for the
-Shadow DOM constraints that come with that approach.
 
 AeroFox does not touch page content at all. It uses Firefox's native
 [`browser.theme.update()`](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/theme)
 API (`background.js`) to set the browser's own chrome colors — tabs,
 toolbar, frame, popups — from a `theme.colors` map
 (`colors.js`). This is an officially supported, first-class WebExtension
-surface, not a styling workaround, so there's no Shadow DOM problem to
-work around: the browser itself owns and renders its chrome.
+surface, not a styling workaround: the browser itself owns and renders
+its chrome, so there's no Shadow DOM or cross-origin CSS problem to work
+around (unlike a content script injecting a stylesheet into a page, which
+cannot reach the inside of a shadow root).
 
 The tradeoff: `theme.colors` takes solid/rgba colors, not CSS gradients
 or `color-mix()`. `colors.js` hand-picks solid colors per theme that
-visually approximate `packages/aero-theme`'s gradients as closely as a
-flat-color API allows — it is not a 1:1 reuse of the shared theme tokens.
+visually approximate the original Vista Glass / Frutiger Eco / Dark Aero
+gradients as closely as a flat-color API allows.
 
 ## Why build this instead of (or alongside) a classic Firefox Aero skin
 

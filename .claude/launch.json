@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "demo-site",
+      "name": "lab-site",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--workspace", "apps/demo-site"],
+      "runtimeArgs": ["run", "dev", "--workspace", "lab-site"],
       "port": 5173
     }
   ]

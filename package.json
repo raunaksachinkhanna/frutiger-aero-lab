@@ -4,13 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
     "dev:lab": "npm run dev -w lab-site",
-    "dev:extension": "npm run dev -w aeroreddit-extension",
-    "dev:demo": "npm run dev -w aeroreddit-demo",
     "build": "npm run build --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "eslint .",
