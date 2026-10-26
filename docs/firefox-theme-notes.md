@@ -66,6 +66,25 @@ available in the sandbox this was built in.
    trip).
 4. Update this file and `PROGRESS.md` with what you actually found.
 
+## New Tab page
+
+`chrome_url_overrides.newtab` points at `newtab/index.html` — a
+deliberately minimal static page (no bundler, matching the rest of this
+add-on): a glass-panel card over a themed gradient, a handful of
+CSS-animated floating bubbles (`prefers-reduced-motion` disables them
+entirely rather than just pausing them), and the current theme's name.
+It reads the stored choice via `storage.js`'s `getThemeChoice()` and
+resolves `'auto'` the same way `background.js` does, then sets
+`--nt-bg`/`--nt-text`/`--nt-accent` CSS custom properties from
+`colors.js`'s `ntp_background`/`ntp_text`/`tab_line` fields — it does
+not modify `colors.js` or `background.js` themselves, only reads from
+them. If storage is ever unavailable, it falls back to rendering the
+default theme rather than getting stuck mid-load. No external requests,
+no telemetry. This was visually verified locally (served over a plain
+static HTTP server, not inside a real Firefox profile — see the
+verification steps above for what that still leaves unconfirmed, like
+Firefox actually invoking this override).
+
 ## Cross-device sync
 
 The chosen theme (including `'auto'`) is persisted via `storage.js`'s

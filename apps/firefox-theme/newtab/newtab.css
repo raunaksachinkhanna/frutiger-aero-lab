@@ -1,0 +1,105 @@
+:root {
+  --nt-bg: #eafcf3;
+  --nt-text: #0a2233;
+  --nt-accent: #0d99ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  background: linear-gradient(180deg, var(--nt-bg), color-mix(in srgb, var(--nt-bg) 70%, #ffffff));
+  color: var(--nt-text);
+  overflow: hidden;
+}
+
+.bubbles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -10vh;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    rgba(255, 255, 255, 0.85),
+    color-mix(in srgb, var(--nt-accent) 55%, transparent) 70%
+  );
+  opacity: 0.35;
+  animation: aerofox-float linear infinite;
+}
+
+@keyframes aerofox-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-120vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble {
+    animation: none;
+    display: none;
+  }
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 36px 48px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 12px 32px rgba(10, 34, 51, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.orb {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--nt-accent) 55%, color-mix(in srgb, var(--nt-accent) 70%, #000));
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--nt-accent) 45%, transparent);
+}
+
+.card h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+}
+
+.current-theme {
+  margin: 0;
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--nt-text) 65%, transparent);
+}

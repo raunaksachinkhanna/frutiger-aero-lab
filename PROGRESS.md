@@ -17,11 +17,27 @@ needed.)
   using `browser.theme.update()` — see `docs/firefox-theme-notes.md` for
   the architecture. `manifest.json`, `background.js` (applies the theme
   on startup and on storage change), `popup.html`/`.js`/`.css` (live
-  theme switcher), `colors.js` (3 palettes — Vista Glass, Frutiger Eco,
-  Dark Aero — as solid-color approximations). `browser.storage.local`
-  persistence.
-- **Tests**: 3 zero-dependency `node:test` tests (color-map completeness,
-  display metadata, default theme validity) — 3/3 passing.
+  theme switcher), `colors.js` (5 palettes — Vista Glass, Frutiger Eco,
+  Dark Aero, Royale Noir, Media Center — as solid-color approximations
+  plus a `theme.images.theme_frame` glossy/glow PNG per theme).
+- **Feature expansion (GitHub milestone #1, all 5 issues closed)**:
+  - Theme header images (`theme.images.theme_frame`, real texture layered
+    over the solid colors).
+  - 2 new palettes: Royale Noir, Media Center.
+  - An "Auto" theme option, resolved from `prefers-color-scheme` via a
+    pure, unit-tested `resolveAutoThemeId()`.
+  - Cross-device sync: `storage.js` prefers `browser.storage.sync`,
+    falls back to `.local` when sync throws or has no value, migrates a
+    found local value into sync, writes to both.
+  - A New Tab page override (`apps/firefox-theme/newtab/`) — minimal
+    Aero-glass card + CSS bubble field (`prefers-reduced-motion`
+    disables them), reads the live theme choice, visually verified
+    locally over a plain static HTTP server (not inside real Firefox).
+- **Tests**: 12 zero-dependency `node:test` tests across
+  `colors.test.mjs` (color-map completeness, display metadata, default
+  theme validity, auto-theme resolution) and `storage.test.mjs`
+  (sync-preferred/local-fallback/sync-throws/nothing-stored, for both
+  reads and writes, against a mock `browser` global) — 12/12 passing.
 - **Lint**: `web-ext lint` clean — 0 errors, 0 notices, 0 warnings.
 - **Icons**: a hand-authored glossy glass-orb SVG (blue), rendered via
   macOS `qlmanage`+`sips` (no bundled image-encoding dependency needed)
@@ -44,9 +60,9 @@ needed.)
 ```
 npm run typecheck -w lab-site                 → clean
 npm run test -w lab-site                      → passing
-npm run test -w aerofox-firefox-theme         → 3/3 passing
+npm run test -w aerofox-firefox-theme         → 12/12 passing
 npm run build -w lab-site                     → succeeds
-npm run build -w aerofox-firefox-theme        → succeeds (web-ext build, zip produced)
+npm run build -w aerofox-firefox-theme        → succeeds (web-ext build, zip produced, all images/newtab files bundled — verified via unzip -l)
 npm run lint (repo root)                      → clean
 npm run format:check (repo root)              → clean
 ```

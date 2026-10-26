@@ -17,18 +17,19 @@ a claim about untested behavior.
       AeroReddit, a Reddit-theming Chrome extension, was built and then
       cancelled; see `research.md`).
 
-## Phase 1 — AeroFox MVP (current)
+## Phase 1 — AeroFox MVP
 
 Built on Firefox's native `browser.theme.update()` API rather than
 content-script CSS injection — see `docs/firefox-theme-notes.md` for why.
 
 - [x] `apps/firefox-theme`: manifest, `background.js` (theme API),
-      `popup.html`/`.js`/`.css` (live theme switcher), `colors.js` (3
-      palettes — Vista Glass, Frutiger Eco, Dark Aero — as solid theme
-      colors). `browser.storage.local`-backed persistence, applied live
-      via `browser.storage.onChanged`.
-- [x] Zero-dependency tests (`node:test`) for color-map completeness; 3/3
-      passing.
+      `popup.html`/`.js`/`.css` (live theme switcher), `colors.js` (5
+      palettes — Vista Glass, Frutiger Eco, Dark Aero, Royale Noir,
+      Media Center — as solid theme colors). Persisted via
+      `storage.js` (sync-preferred, local-fallback), applied live via
+      `browser.storage.onChanged`.
+- [x] Zero-dependency tests (`node:test`): 12/12 passing across
+      `colors.test.mjs` and `storage.test.mjs`.
 - [x] `web-ext lint` clean: 0 errors, 0 notices, 0 warnings.
 - [x] Extension icons: hand-authored glossy glass-orb SVG rendered to
       16/32/48/128px PNGs, wired into `manifest.json` and the action
@@ -39,9 +40,26 @@ content-script CSS injection — see `docs/firefox-theme-notes.md` for why.
       available browser tool either (see `PROGRESS.md`). See
       `docs/firefox-theme-notes.md` for the manual verification steps.
 
+## Phase 1.5 — AeroFox Feature Expansion (current)
+
+Tracked as [GitHub milestone #1](https://github.com/raunaksachinkhanna/frutiger-aero-lab/milestone/1).
+
+- [x] Theme header images via `theme.images.theme_frame` — real
+      glossy/glow texture per theme, not just flat colors.
+- [x] Additional palettes: Royale Noir, Media Center.
+- [x] OS-synced "Auto" theme option (light/dark via
+      `prefers-color-scheme`).
+- [x] Cross-device theme sync (`browser.storage.sync`, with a
+      graceful `.local` fallback).
+- [x] New Tab page override: a minimal Aero-glass page
+      (`apps/firefox-theme/newtab/`), visually verified locally (static
+      HTTP server) but not yet inside a real Firefox profile.
+
 ## Phase 2 — Polish & validation
 
-- [ ] Manually verify AeroFox in real Firefox (see Phase 1 above).
+- [ ] Manually verify AeroFox — including the new header images, Auto
+      theme, sync, and New Tab page — in real Firefox (see Phase 1
+      above).
 - [ ] Gather feedback on AeroFox from the Frutiger Aero community.
 - [ ] Expand test coverage if real usage surfaces gaps.
 

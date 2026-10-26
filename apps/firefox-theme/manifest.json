@@ -3,7 +3,7 @@
   "name": "AeroFox — Frutiger Aero for Firefox",
   "short_name": "AeroFox",
   "version": "0.1.0",
-  "description": "Reskins Firefox's own browser chrome in Frutiger Aero — Vista Glass, Frutiger Eco, and Dark Aero — using Firefox's native theme API, with a live switcher. 100% original gradients, no copied OS assets, no page content touched.",
+  "description": "Reskins Firefox's own browser chrome and New Tab page in Frutiger Aero — Vista Glass, Frutiger Eco, Dark Aero, Royale Noir, and Media Center — using Firefox's native theme API, with a live switcher. 100% original gradients, no copied OS assets, no external page content touched.",
   "browser_specific_settings": {
     "gecko": {
       "id": "aerofox@frutiger-aero-lab",
@@ -17,6 +17,9 @@
   "background": {
     "scripts": ["background.js"],
     "type": "module"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/index.html"
   },
   "icons": {
     "16": "icons/icon-16.png",
