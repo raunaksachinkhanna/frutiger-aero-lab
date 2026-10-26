@@ -102,3 +102,46 @@ footer {
 footer a {
   color: #0a5fc4;
 }
+
+#themes button:focus-visible,
+.backup button:focus-visible {
+  outline: 2px solid #0a5fc4;
+  outline-offset: 2px;
+}
+
+@media (prefers-contrast: more) {
+  #themes button {
+    border-width: 2px;
+    border-color: #0a2233;
+    background: #fff;
+  }
+  #themes button[data-selected='true'] {
+    background: var(--swatch);
+  }
+  .backup button {
+    border-width: 2px;
+    border-color: #0a2233;
+    background: #fff;
+  }
+}
+
+@media (forced-colors: active) {
+  #themes button,
+  .backup button {
+    border: 1px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+  #themes button[data-selected='true'] {
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+  .dot {
+    forced-color-adjust: none;
+  }
+  #themes button:focus-visible,
+  .backup button:focus-visible {
+    outline-color: Highlight;
+  }
+}

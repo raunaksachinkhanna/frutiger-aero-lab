@@ -103,3 +103,30 @@ body {
   font-size: 0.82rem;
   color: color-mix(in srgb, var(--nt-text) 65%, transparent);
 }
+
+@media (prefers-contrast: more) {
+  .card {
+    border-width: 2px;
+    border-color: var(--nt-text);
+    background: Canvas;
+  }
+}
+
+@media (forced-colors: active) {
+  body {
+    background: Canvas;
+  }
+  .bubbles {
+    display: none;
+  }
+  .card {
+    border: 2px solid CanvasText;
+    background: Canvas;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .orb {
+    forced-color-adjust: none;
+  }
+}

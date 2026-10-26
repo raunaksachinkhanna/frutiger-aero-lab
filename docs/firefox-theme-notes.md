@@ -66,6 +66,32 @@ available in the sandbox this was built in.
    trip).
 4. Update this file and `PROGRESS.md` with what you actually found.
 
+## High-contrast / forced-colors and focus-visible styling
+
+`popup.css`, `options/options.css`, and `newtab/newtab.css` each add two
+media-query blocks on top of the existing rules (nothing removed or
+restructured): `@media (prefers-contrast: more)` thickens borders and
+flattens translucent backgrounds to solid ones for better legibility,
+and `@media (forced-colors: active)` (Windows High Contrast Mode) swaps
+custom colors for CSS system colors (`ButtonText`/`ButtonFace`/
+`Highlight`/`HighlightText`/`Canvas`/`CanvasText`) so selection state
+stays visible even with the author palette stripped out —
+`forced-color-adjust: none` is applied narrowly, only to each theme's
+small color-identity "dot" swatch, not globally. The New Tab page's
+decorative bubble field is hidden entirely under forced-colors (same
+treatment as `prefers-reduced-motion`) since it's purely decorative and
+its translucent gradients don't survive the mode well. All three files
+also get an explicit, high-contrast `:focus-visible` outline on the
+theme picker items and the Export/Import buttons, replacing reliance on
+the browser's own default outline. Verified: `:focus-visible` confirmed
+visually (native Tab-key focus) in the options page via the browser
+pane — clearly visible against the glass background. The
+`forced-colors`/`prefers-contrast` media queries themselves could not be
+visually verified here — this browser pane's tools don't expose a way
+to emulate `forced-colors`, and that genuinely needs Windows High
+Contrast Mode (or a devtools media-feature override) to confirm, not
+just a CSS read-through.
+
 ## Keyboard navigation for the theme pickers
 
 `theme-picker.js` is a shared radiogroup renderer used by both

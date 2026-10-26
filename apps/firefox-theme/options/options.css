@@ -116,3 +116,49 @@ footer {
 footer a {
   color: #0a5fc4;
 }
+
+.theme-card:focus-visible,
+.backup button:focus-visible {
+  outline: 3px solid #0a5fc4;
+  outline-offset: 3px;
+}
+
+@media (prefers-contrast: more) {
+  .theme-card {
+    border-width: 2px;
+    border-color: #0a2233;
+    background-color: #fff;
+  }
+  .theme-card[data-selected='true'] {
+    border-color: var(--swatch);
+    box-shadow: 0 0 0 3px var(--swatch);
+  }
+  .backup button {
+    border-width: 2px;
+    border-color: #0a2233;
+    background: #fff;
+  }
+}
+
+@media (forced-colors: active) {
+  .theme-card,
+  .backup button {
+    border: 1px solid ButtonText;
+    background-color: ButtonFace;
+    background-image: none;
+    color: ButtonText;
+    box-shadow: none;
+  }
+  .theme-card[data-selected='true'] {
+    border-color: Highlight;
+    border-width: 2px;
+    box-shadow: none;
+  }
+  .theme-card .dot {
+    forced-color-adjust: none;
+  }
+  .theme-card:focus-visible,
+  .backup button:focus-visible {
+    outline-color: Highlight;
+  }
+}
