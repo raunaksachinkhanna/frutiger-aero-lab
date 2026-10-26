@@ -6,13 +6,15 @@
  * (same base hues as the Vista Glass / Frutiger Eco / Dark Aero themes
  * used elsewhere in this monorepo).
  */
-export const THEME_IDS = ['vista-glass', 'frutiger-eco', 'dark-aero']
+export const THEME_IDS = ['vista-glass', 'frutiger-eco', 'dark-aero', 'royale-noir', 'media-green']
 export const DEFAULT_THEME_ID = 'vista-glass'
 
 export const THEME_META = {
   'vista-glass': { name: 'Vista Glass', swatch: '#0d99ff' },
   'frutiger-eco': { name: 'Frutiger Eco', swatch: '#14c472' },
   'dark-aero': { name: 'Dark Aero', swatch: '#00e5ff' },
+  'royale-noir': { name: 'Royale Noir', swatch: '#8b6fd6' },
+  'media-green': { name: 'Media Center', swatch: '#39ff8c' },
 }
 
 export const FIREFOX_THEME_COLORS = {
@@ -84,5 +86,51 @@ export const FIREFOX_THEME_COLORS = {
     button_background_hover: 'rgba(0, 229, 255, 0.2)',
     ntp_background: '#030a14',
     ntp_text: '#e7f6ff',
+  },
+  'royale-noir': {
+    frame: '#1a1620',
+    frame_inactive: '#0d0b12',
+    tab_background_text: '#efe9ff',
+    tab_text: '#efe9ff',
+    tab_line: '#8b6fd6',
+    tab_background_separator: 'rgba(139, 111, 214, 0.25)',
+    toolbar: 'rgba(28, 22, 38, 0.85)',
+    toolbar_text: '#efe9ff',
+    toolbar_field: 'rgba(36, 28, 48, 0.88)',
+    toolbar_field_text: '#efe9ff',
+    toolbar_field_border: 'rgba(139, 111, 214, 0.35)',
+    toolbar_top_separator: 'rgba(139, 111, 214, 0.25)',
+    toolbar_bottom_separator: 'rgba(0, 0, 0, 0.45)',
+    icons: '#b9a4f2',
+    popup: 'rgba(22, 18, 30, 0.97)',
+    popup_text: '#efe9ff',
+    popup_border: 'rgba(139, 111, 214, 0.32)',
+    button_background_active: '#8b6fd6',
+    button_background_hover: 'rgba(139, 111, 214, 0.22)',
+    ntp_background: '#0d0b12',
+    ntp_text: '#efe9ff',
+  },
+  'media-green': {
+    frame: '#07140d',
+    frame_inactive: '#040a07',
+    tab_background_text: '#d6ffe6',
+    tab_text: '#d6ffe6',
+    tab_line: '#39ff8c',
+    tab_background_separator: 'rgba(57, 255, 140, 0.22)',
+    toolbar: 'rgba(8, 24, 16, 0.85)',
+    toolbar_text: '#d6ffe6',
+    toolbar_field: 'rgba(10, 32, 20, 0.88)',
+    toolbar_field_text: '#d6ffe6',
+    toolbar_field_border: 'rgba(57, 255, 140, 0.3)',
+    toolbar_top_separator: 'rgba(57, 255, 140, 0.22)',
+    toolbar_bottom_separator: 'rgba(0, 0, 0, 0.45)',
+    icons: '#6dffb0',
+    popup: 'rgba(6, 18, 12, 0.97)',
+    popup_text: '#d6ffe6',
+    popup_border: 'rgba(57, 255, 140, 0.28)',
+    button_background_active: '#39ff8c',
+    button_background_hover: 'rgba(57, 255, 140, 0.2)',
+    ntp_background: '#030a07',
+    ntp_text: '#d6ffe6',
   },
 }
