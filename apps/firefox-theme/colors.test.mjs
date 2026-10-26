@@ -9,6 +9,7 @@ import {
   THEME_IDS,
   THEME_IMAGES,
   THEME_META,
+  nextThemeId,
   resolveAutoThemeId,
 } from './colors.js'
 
@@ -64,4 +65,23 @@ test('resolveAutoThemeId picks a real theme for both color schemes', () => {
   assert.ok(THEME_IDS.includes(resolveAutoThemeId(true)), 'dark-scheme result should be a real theme')
   assert.ok(THEME_IDS.includes(resolveAutoThemeId(false)), 'light-scheme result should be a real theme')
   assert.notEqual(resolveAutoThemeId(true), resolveAutoThemeId(false))
+})
+
+test('nextThemeId cycles through every real theme in order', () => {
+  let id = THEME_IDS[0]
+  const seen = [id]
+  for (let i = 1; i < THEME_IDS.length; i += 1) {
+    id = nextThemeId(id)
+    seen.push(id)
+  }
+  assert.deepEqual(seen, THEME_IDS)
+})
+
+test('nextThemeId wraps from the last theme back to the first', () => {
+  assert.equal(nextThemeId(THEME_IDS[THEME_IDS.length - 1]), THEME_IDS[0])
+})
+
+test('nextThemeId treats auto or an unrecognized id as starting before the first theme', () => {
+  assert.equal(nextThemeId(AUTO_THEME_ID), THEME_IDS[0])
+  assert.equal(nextThemeId('not-a-real-theme'), THEME_IDS[0])
 })

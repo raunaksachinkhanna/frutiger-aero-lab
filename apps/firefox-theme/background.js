@@ -3,9 +3,10 @@ import {
   DEFAULT_THEME_ID,
   FIREFOX_THEME_COLORS,
   THEME_IMAGES,
+  nextThemeId,
   resolveAutoThemeId,
 } from './colors.js'
-import { getThemeChoice, onThemeChoiceChanged } from './storage.js'
+import { getThemeChoice, onThemeChoiceChanged, setThemeChoice } from './storage.js'
 
 function prefersDarkScheme() {
   return typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches
@@ -33,5 +34,11 @@ if (typeof matchMedia === 'function') {
     }
   })
 }
+
+browser.commands?.onCommand.addListener(async (command) => {
+  if (command !== 'cycle-theme') return
+  const current = await getThemeChoice(DEFAULT_THEME_ID)
+  await setThemeChoice(nextThemeId(current))
+})
 
 void init()

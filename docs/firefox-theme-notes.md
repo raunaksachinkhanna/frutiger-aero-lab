@@ -66,6 +66,22 @@ available in the sandbox this was built in.
    trip).
 4. Update this file and `PROGRESS.md` with what you actually found.
 
+## Keyboard shortcut
+
+`Alt+Shift+A` (the `cycle-theme` command in `manifest.json`) advances to
+the next theme without opening the popup. `background.js` listens via
+`browser.commands.onCommand`, reads the current choice with
+`getThemeChoice()`, computes the next one with `colors.js`'s
+`nextThemeId(currentId)` (a pure function — wraps from the last real
+theme back to the first, and treats `'auto'` or any unrecognized id as
+starting before the first theme), and persists it with
+`setThemeChoice()`, which already triggers the existing apply path — no
+separate theme-application logic here. The cycle only ever lands on a
+real theme, never `'auto'` itself, since cycling through an OS-driven
+pseudo-id via a manual keyboard press doesn't make sense. Whether
+Firefox actually registers and fires this shortcut can only be confirmed
+in a real profile; see the verification steps above.
+
 ## Settings export/import
 
 `settings.js` is a pure module (no DOM or `browser.*` calls, so it's

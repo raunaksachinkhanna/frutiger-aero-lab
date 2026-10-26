@@ -46,6 +46,16 @@ export function resolveAutoThemeId(prefersDark) {
   return prefersDark ? AUTO_DARK_THEME_ID : AUTO_LIGHT_THEME_ID
 }
 
+/**
+ * Advances to the next real theme in THEME_IDS order, wrapping around.
+ * 'auto' and any unrecognized id are treated as if starting before the
+ * first theme, so the keyboard shortcut always does something sane.
+ */
+export function nextThemeId(currentId) {
+  const index = THEME_IDS.indexOf(currentId)
+  return THEME_IDS[(index + 1) % THEME_IDS.length]
+}
+
 export const FIREFOX_THEME_COLORS = {
   'vista-glass': {
     frame: '#4fb3f0',

@@ -21,6 +21,14 @@
   "chrome_url_overrides": {
     "newtab": "newtab/index.html"
   },
+  "commands": {
+    "cycle-theme": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      },
+      "description": "Cycle AeroFox to the next theme"
+    }
+  },
   "icons": {
     "16": "icons/icon-16.png",
     "32": "icons/icon-32.png",
