@@ -28,4 +28,18 @@
   );
   --aero-bevel:
     inset 0 1px 0 rgba(180, 245, 255, 0.4), inset 0 -2px 6px rgba(0, 0, 0, 0.5);
+  --aero-light-streak: linear-gradient(
+    112deg,
+    transparent 28%,
+    rgba(180, 245, 255, 0.3) 42%,
+    transparent 57%
+  );
+  --aero-droplet: radial-gradient(
+    circle at 32% 25%,
+    rgba(220, 252, 255, 0.9) 0 7%,
+    rgba(106, 232, 255, 0.25) 8% 24%,
+    rgba(0, 229, 255, 0.14) 58%,
+    transparent 72%
+  );
+  --aero-glow: 0 0 22px rgba(0, 229, 255, 0.2), 0 0 48px rgba(106, 232, 184, 0.1);
 }

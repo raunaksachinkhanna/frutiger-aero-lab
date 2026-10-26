@@ -1,0 +1,14 @@
+{
+  "name": "aerofox-firefox-theme",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test colors.test.mjs",
+    "lint": "web-ext lint --source-dir=. --ignore-files=package.json --ignore-files=colors.test.mjs --ignore-files=dist/**",
+    "build": "web-ext build --source-dir=. --artifacts-dir=dist --overwrite-dest --filename=aerofox.zip --ignore-files=package.json --ignore-files=colors.test.mjs"
+  },
+  "devDependencies": {
+    "web-ext": "^8.5.0"
+  }
+}

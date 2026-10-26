@@ -6,13 +6,25 @@
  * genuinely restyle the whole page, not just its chrome.
  */
 html[data-aero-site='old'] body {
-  background: var(--aero-bg-gradient) fixed !important;
+  background:
+    var(--aero-droplet),
+    var(--aero-droplet),
+    var(--aero-bg-gradient) fixed !important;
+  background-position:
+    14% 18%,
+    88% 72%,
+    0 0;
+  background-repeat: no-repeat;
+  background-size:
+    76px 76px,
+    112px 112px,
+    auto;
   color: var(--aero-text);
 }
 
 html[data-aero-site='old'] #header {
   background:
-    var(--aero-gloss),
+    var(--aero-gloss), var(--aero-light-streak),
     color-mix(
       in srgb,
       var(--aero-surface-bg-strong) calc(var(--aero-opacity-scale, 1) * 100%),
@@ -21,7 +33,7 @@ html[data-aero-site='old'] #header {
   backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1)));
   -webkit-backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1)));
   border-bottom: 1px solid var(--aero-surface-border) !important;
-  box-shadow: var(--aero-shadow), var(--aero-bevel) !important;
+  box-shadow: var(--aero-shadow), var(--aero-glow), var(--aero-bevel) !important;
 }
 
 html[data-aero-site='old'] #header-bottom-left .tabmenu li a {
@@ -40,7 +52,7 @@ html[data-aero-site='old'] .content {
 
 html[data-aero-site='old'] .thing {
   background:
-    var(--aero-gloss),
+    var(--aero-gloss), var(--aero-light-streak),
     color-mix(
       in srgb,
       var(--aero-surface-bg) calc(var(--aero-opacity-scale, 1) * 100%),
@@ -55,6 +67,22 @@ html[data-aero-site='old'] .thing {
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
+}
+
+html[data-aero-site='old'] .thing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--aero-light-streak);
+  opacity: 0.7;
+  transform: translateX(-35%);
+  transition: transform 0.35s ease;
+}
+
+html[data-aero-site='old'] .thing:hover::before {
+  transform: translateX(35%);
 }
 
 html[data-aero-site='old'] .thing:hover {
@@ -88,10 +116,11 @@ html[data-aero-site='old'] .midcol .score.dislikes {
 
 html[data-aero-site='old'] .side .spacer .titlebox,
 html[data-aero-site='old'] .side .spacer {
-  background: var(--aero-gloss), var(--aero-surface-bg) !important;
+  background:
+    var(--aero-gloss), var(--aero-light-streak), var(--aero-surface-bg) !important;
   border: 1px solid var(--aero-surface-border) !important;
   border-radius: var(--aero-radius-md) !important;
-  box-shadow: var(--aero-shadow), var(--aero-bevel);
+  box-shadow: var(--aero-shadow), var(--aero-glow), var(--aero-bevel);
 }
 
 html[data-aero-site='old'] .commentarea .comment {
@@ -117,14 +146,28 @@ html[data-aero-site='old'] button.btn,
 html[data-aero-site='old'] .styled-button,
 html[data-aero-site='old'] input[type='submit'] {
   background:
-    var(--aero-gloss),
+    var(--aero-gloss), var(--aero-light-streak),
     linear-gradient(180deg, var(--aero-accent) 0%, var(--aero-accent-strong) 100%) !important;
   color: #fff !important;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   border: none !important;
   border-radius: var(--aero-radius-pill, 999px) !important;
-  box-shadow: var(--aero-shadow), var(--aero-bevel);
+  box-shadow: var(--aero-shadow), var(--aero-glow), var(--aero-bevel);
   transition: transform 0.1s ease;
+}
+
+html[data-aero-site='old'] .thing,
+html[data-aero-site='old'] .side .spacer .titlebox,
+html[data-aero-site='old'] .side .spacer {
+  position: relative;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-aero-site='old'] .thing::before {
+    transition: none;
+    transform: none;
+  }
 }
 
 html[data-aero-site='old'] .btn:active,
