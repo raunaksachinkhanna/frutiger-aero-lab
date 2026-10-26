@@ -1,5 +1,6 @@
 import { AUTO_META, AUTO_THEME_ID, DEFAULT_THEME_ID, THEME_IDS, THEME_META } from './colors.js'
 import { getThemeChoice, setThemeChoice } from './storage.js'
+import { exportSettingsJson, importSettingsJson } from './settings.js'
 
 const SELECTABLE_IDS = [AUTO_THEME_ID, ...THEME_IDS]
 
@@ -25,6 +26,27 @@ function renderButtons(container, selectedId, onSelect) {
   }
 }
 
+function showBackupError(message) {
+  const el = document.getElementById('backup-error')
+  if (!el) return
+  if (message) {
+    el.textContent = message
+    el.hidden = false
+  } else {
+    el.hidden = true
+  }
+}
+
+function downloadJson(filename, json) {
+  const blob = new Blob([json], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 async function main() {
   const container = document.getElementById('themes')
   let selectedId = await getThemeChoice(DEFAULT_THEME_ID)
@@ -32,10 +54,30 @@ async function main() {
   async function handleSelect(id) {
     selectedId = id
     await setThemeChoice(id)
+    showBackupError(null)
     renderButtons(container, selectedId, handleSelect)
   }
 
   renderButtons(container, selectedId, handleSelect)
+
+  document.getElementById('export-btn')?.addEventListener('click', () => {
+    downloadJson('aerofox-settings.json', exportSettingsJson(selectedId))
+  })
+
+  const importInput = document.getElementById('import-file')
+  document.getElementById('import-btn')?.addEventListener('click', () => importInput?.click())
+  importInput?.addEventListener('change', async () => {
+    const file = importInput.files?.[0]
+    importInput.value = ''
+    if (!file) return
+    const text = await file.text()
+    const themeId = importSettingsJson(text)
+    if (themeId === null) {
+      showBackupError("That file isn't a valid AeroFox settings export.")
+      return
+    }
+    await handleSelect(themeId)
+  })
 }
 
 void main()

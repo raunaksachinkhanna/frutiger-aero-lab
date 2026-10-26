@@ -66,6 +66,20 @@ available in the sandbox this was built in.
    trip).
 4. Update this file and `PROGRESS.md` with what you actually found.
 
+## Settings export/import
+
+`settings.js` is a pure module (no DOM or `browser.*` calls, so it's
+fully unit-testable) exporting `exportSettingsJson(themeId)` /
+`importSettingsJson(raw)` — the same envelope shape AeroReddit used
+(`{ aeroFoxSettings: true, schemaVersion: 1, themeId }`). Import always
+goes through `JSON.parse` (never `eval`) and validates `themeId` against
+the known selectable ids before returning it; anything malformed,
+tampered, or invalid falls back to `DEFAULT_THEME_ID` rather than being
+trusted wholesale. The popup wires this to Export/Import buttons
+(`popup.js`) via a Blob download and a hidden file input. 8 tests in
+`settings.test.mjs` cover round-trips, invalid JSON, tampered/invalid
+theme ids, and a prototype-pollution-shaped payload.
+
 ## New Tab page
 
 `chrome_url_overrides.newtab` points at `newtab/index.html` — a

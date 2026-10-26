@@ -68,6 +68,31 @@ header p {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
 }
 
+.backup {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.backup button {
+  flex: 1;
+  appearance: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 34, 51, 0.15);
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0a2233;
+}
+
+.backup-error {
+  margin: 8px 0 0;
+  font-size: 0.68rem;
+  color: #b3261e;
+}
+
 footer {
   margin-top: 12px;
   font-size: 0.62rem;

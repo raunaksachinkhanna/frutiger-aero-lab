@@ -14,6 +14,12 @@
       </div>
     </header>
     <div id="themes" role="radiogroup" aria-label="Choose a theme"></div>
+    <div class="backup">
+      <button type="button" id="export-btn">Export</button>
+      <button type="button" id="import-btn">Import</button>
+      <input type="file" id="import-file" accept="application/json" hidden />
+    </div>
+    <p class="backup-error" id="backup-error" role="alert" hidden></p>
     <footer>
       Original gradients only — no copied OS assets.
       <a href="https://github.com/raunaksachinkhanna/frutiger-aero-lab" target="_blank" rel="noreferrer"
