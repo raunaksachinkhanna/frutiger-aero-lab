@@ -66,6 +66,20 @@ available in the sandbox this was built in.
    trip).
 4. Update this file and `PROGRESS.md` with what you actually found.
 
+## Options page
+
+`options_ui.page` points at `options/index.html` — a fuller page
+(`open_in_tab: true`) than the popup has room for, reachable from
+Firefox's native add-on manager. Same no-bundler pattern as the rest of
+this add-on. It shows all 6 selectable ids (5 real themes + Auto) as
+cards using `THEME_META` for name/swatch and `THEME_IMAGES` as a subtle
+background texture per card, plus the same Export/Import controls as
+the popup, built on the exact same `settings.js`/`storage.js` functions
+(no duplicated validation logic). Like the New Tab page, it falls back
+to the default theme if storage is ever unavailable at load time rather
+than getting stuck. Visually verified locally over a plain static HTTP
+server via the browser pane — not yet inside a real Firefox profile.
+
 ## Keyboard shortcut
 
 `Alt+Shift+A` (the `cycle-theme` command in `manifest.json`) advances to

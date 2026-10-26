@@ -21,6 +21,10 @@
   "chrome_url_overrides": {
     "newtab": "newtab/index.html"
   },
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
   "commands": {
     "cycle-theme": {
       "suggested_key": {

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AeroFox Options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <header>
+      <span class="orb" aria-hidden="true"></span>
+      <div>
+        <h1>AeroFox</h1>
+        <p>Choose a theme, or back up your settings.</p>
+      </div>
+    </header>
+
+    <section>
+      <h2>Theme</h2>
+      <div id="themes" class="theme-grid" role="radiogroup" aria-label="Choose a theme"></div>
+    </section>
+
+    <section>
+      <h2>Backup</h2>
+      <div class="backup">
+        <button type="button" id="export-btn">Export settings</button>
+        <button type="button" id="import-btn">Import settings</button>
+        <input type="file" id="import-file" accept="application/json" hidden />
+      </div>
+      <p class="backup-error" id="backup-error" role="alert" hidden></p>
+    </section>
+
+    <footer>
+      Original gradients only — no copied OS assets.
+      <a href="https://github.com/raunaksachinkhanna/frutiger-aero-lab" target="_blank" rel="noreferrer"
+        >Source</a
+      >
+    </footer>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
