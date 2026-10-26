@@ -1,6 +1,7 @@
 import { AUTO_META, AUTO_THEME_ID, DEFAULT_THEME_ID, THEME_IDS, THEME_META } from './colors.js'
 import { getThemeChoice, setThemeChoice } from './storage.js'
 import { exportSettingsJson, importSettingsJson } from './settings.js'
+import { renderThemePicker } from './theme-picker.js'
 
 const SELECTABLE_IDS = [AUTO_THEME_ID, ...THEME_IDS]
 
@@ -9,21 +10,18 @@ function getMeta(id) {
 }
 
 function renderButtons(container, selectedId, onSelect) {
-  container.innerHTML = ''
-  for (const id of SELECTABLE_IDS) {
-    const meta = getMeta(id)
-    const button = document.createElement('button')
-    button.type = 'button'
-    button.role = 'radio'
-    button.setAttribute('aria-checked', String(id === selectedId))
-    button.dataset.selected = String(id === selectedId)
-    button.style.setProperty('--swatch', meta.swatch)
-    const dot = document.createElement('span')
-    dot.className = 'dot'
-    button.append(dot, document.createTextNode(meta.name))
-    button.addEventListener('click', () => onSelect(id))
-    container.appendChild(button)
-  }
+  renderThemePicker(container, {
+    ids: SELECTABLE_IDS,
+    selectedId,
+    onSelect,
+    renderItem(button, id) {
+      const meta = getMeta(id)
+      button.style.setProperty('--swatch', meta.swatch)
+      const dot = document.createElement('span')
+      dot.className = 'dot'
+      button.append(dot, document.createTextNode(meta.name))
+    },
+  })
 }
 
 function showBackupError(message) {
@@ -49,7 +47,13 @@ function downloadJson(filename, json) {
 
 async function main() {
   const container = document.getElementById('themes')
-  let selectedId = await getThemeChoice(DEFAULT_THEME_ID)
+  let selectedId = DEFAULT_THEME_ID
+  try {
+    selectedId = await getThemeChoice(DEFAULT_THEME_ID)
+  } catch {
+    // Storage unavailable for some reason — fall through and render the
+    // default theme rather than leaving the popup stuck mid-load.
+  }
 
   async function handleSelect(id) {
     selectedId = id

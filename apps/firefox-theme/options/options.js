@@ -8,6 +8,7 @@ import {
 } from '../colors.js'
 import { getThemeChoice, setThemeChoice } from '../storage.js'
 import { exportSettingsJson, importSettingsJson } from '../settings.js'
+import { renderThemePicker } from '../theme-picker.js'
 
 const SELECTABLE_IDS = [AUTO_THEME_ID, ...THEME_IDS]
 
@@ -16,29 +17,26 @@ function getMeta(id) {
 }
 
 function renderCards(container, selectedId, onSelect) {
-  container.innerHTML = ''
-  for (const id of SELECTABLE_IDS) {
-    const meta = getMeta(id)
-    const card = document.createElement('button')
-    card.type = 'button'
-    card.className = 'theme-card'
-    card.role = 'radio'
-    card.setAttribute('aria-checked', String(id === selectedId))
-    card.dataset.selected = String(id === selectedId)
-    card.style.setProperty('--swatch', meta.swatch)
-    const previewImage = THEME_IMAGES[id]
-    if (previewImage) {
-      card.style.setProperty('--preview-image', `url("../${previewImage}")`)
-    }
-    const dot = document.createElement('span')
-    dot.className = 'dot'
-    const name = document.createElement('span')
-    name.className = 'name'
-    name.textContent = meta.name
-    card.append(dot, name)
-    card.addEventListener('click', () => onSelect(id))
-    container.appendChild(card)
-  }
+  renderThemePicker(container, {
+    ids: SELECTABLE_IDS,
+    selectedId,
+    onSelect,
+    renderItem(card, id) {
+      const meta = getMeta(id)
+      card.className = 'theme-card'
+      card.style.setProperty('--swatch', meta.swatch)
+      const previewImage = THEME_IMAGES[id]
+      if (previewImage) {
+        card.style.setProperty('--preview-image', `url("../${previewImage}")`)
+      }
+      const dot = document.createElement('span')
+      dot.className = 'dot'
+      const name = document.createElement('span')
+      name.className = 'name'
+      name.textContent = meta.name
+      card.append(dot, name)
+    },
+  })
 }
 
 function showBackupError(message) {

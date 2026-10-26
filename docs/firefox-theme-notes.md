@@ -66,6 +66,24 @@ available in the sandbox this was built in.
    trip).
 4. Update this file and `PROGRESS.md` with what you actually found.
 
+## Keyboard navigation for the theme pickers
+
+`theme-picker.js` is a shared radiogroup renderer used by both
+`popup.js` and `options/options.js`, replacing their previously
+near-duplicate `renderButtons()`/`renderCards()` functions — the two
+callers still render visually different items (pill buttons vs. larger
+cards) via a caller-supplied `renderItem` callback, but the roving-
+tabindex and arrow-key behavior (WAI-ARIA radiogroup pattern) is
+centralized: only the selected item is a tab stop, arrow keys move
+focus *and* fire the same selection path a click would, and selection
+wraps at both ends. The index math is a pure, unit-tested
+`stepIndex(current, length, delta)`. Verified: focus movement visually
+in both real pages (arrow keys do move focus correctly), and the full
+click/keyboard → select → persist → re-render cycle via a temporary
+mock-`browser.storage` harness (not shipped, deleted after use) since
+the real pages can't complete a selection outside a real extension
+context — same limitation as everywhere else in this add-on.
+
 ## Options page
 
 `options_ui.page` points at `options/index.html` — a fuller page
