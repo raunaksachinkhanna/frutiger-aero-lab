@@ -27,15 +27,28 @@ open item).
 - [Install the extension locally](apps/extension/README.md)
 - [How it's built](docs/architecture.md)
 
+## AeroFox
+
+A real **Firefox browser theme add-on** — uses Firefox's native
+[`theme.update()`](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/theme)
+API to reskin the browser chrome itself (not page content) in the same
+three Aero palettes, with a live popup switcher. No Shadow DOM problem
+here since it's an officially supported theming surface, not CSS
+injection — see [`apps/firefox-theme/`](apps/firefox-theme/) for the
+source and [`docs/firefox-theme-notes.md`](docs/firefox-theme-notes.md)
+for how it differs architecturally from AeroReddit, and what sets it
+apart from existing static Firefox Aero themes.
+
 ## Repository structure
 
 This is an npm-workspaces monorepo:
 
 ```
 apps/
-  lab-site/      This landing page (Phase 0 placeholder, still live)
-  extension/     AeroReddit: the MV3 Chrome extension
-  demo-site/     AeroReddit: the interactive showcase site
+  lab-site/       This landing page (Phase 0 placeholder, still live)
+  extension/      AeroReddit: the MV3 Chrome extension
+  demo-site/      AeroReddit: the interactive showcase site
+  firefox-theme/  AeroFox: the Firefox native browser theme add-on
 packages/
   aero-theme/    Shared theme tokens/CSS used by both AeroReddit apps
 docs/            Research, roadmap, and architecture notes

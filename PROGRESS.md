@@ -1,6 +1,6 @@
-# AeroReddit — Progress
+# AeroReddit / AeroFox — Progress
 
-Last updated: 2026-10-24. This file is the source of truth for what's
+Last updated: 2026-10-26. This file is the source of truth for what's
 actually done vs. claimed-but-unverified — kept accurate so work can
 resume from here without re-deriving context.
 
@@ -58,6 +58,29 @@ resume from here without re-deriving context.
   updated; `docs/extension-reddit-notes.md` added (the Shadow DOM
   explanation + how to verify/extend selectors); root `README.md` and
   `apps/extension/README.md` updated.
+- **AeroFox (`apps/firefox-theme`)**: a real Firefox browser theme add-on
+  using `browser.theme.update()` — not a port of AeroReddit's
+  content-script approach, see `docs/firefox-theme-notes.md`. Live
+  popup theme switcher, `browser.storage.local` persistence, 3 palettes
+  as solid-color approximations of the shared Aero themes
+  (`colors.js`). 3 zero-dependency `node:test` tests, passing.
+  `web-ext lint` clean (0 errors/notices/warnings). Not yet loaded into
+  a real Firefox — see Known limitations.
+- **Extension icons (Chrome + Firefox)**: a hand-authored glossy glass
+  orb SVG (orange for AeroReddit, blue for AeroFox), rendered via macOS
+  `qlmanage`+`sips` (no bundled image-encoding dependency needed) to
+  16/32/48/128px PNGs, wired into both manifests' `icons` and
+  `action.default_icon`. Verified the Chrome build actually copies them
+  into `dist/icons/`.
+- **Demo-site Aero polish gap closed**: the light-streak/droplet/glow
+  tokens added to `packages/aero-theme` and `old-reddit.css` were not
+  previously applied anywhere in `apps/demo-site` — fixed across
+  `Hero.css`, `RedditMock.css` (including a hover-sliding light streak
+  on post cards, mirroring `old-reddit.css`'s `.thing::before`),
+  `ThemeSwitcher.css`, and `Sections.css`. Verified visually via the
+  built-in browser pane against the local dev server (screenshots
+  confirmed the glossy droplet highlight and sweeping streak render
+  correctly).
 
 ## Commands run and results (all passing as of this commit)
 
@@ -76,52 +99,50 @@ npm run format:check (repo root)           → clean
 
 ## Known limitations (stated honestly, not hidden)
 
-1. **No live Reddit testing — actively attempted twice, both blocked by
-   tooling, not skipped.** First attempt: `reddit.com`/`old.reddit.com`
-   were unreachable (navigation denied) from this session's built-in
-   browser pane while writing the CSS. Second attempt (this session,
-   later): tried again via the built-in pane (still denied/unavailable —
-   `tabs_create` and `navigate` both failed) and via Claude-in-Chrome
-   (the Chrome extension reported "not connected"). Neither is something
-   retrying fixes — both are environment/connection issues outside this
-   session's control. All Reddit-targeting CSS is based on well-known,
+1. **No live Reddit testing — now confirmed architecturally impossible
+   for any browser-automation tool, not just a transient blocker.** The
+   built-in browser pane recovered this session (confirmed by
+   screenshotting the demo site), but sideloading an unpacked extension
+   requires `chrome://extensions` (internal browser pages are refused by
+   the pane — confirmed by direct attempt) plus a native OS file-picker
+   dialog to select the unpacked `dist/` folder, which no browser-
+   automation tool (built-in pane or Claude-in-Chrome) can drive. This
+   isn't a retry-fixable availability issue — it needs a human at a real
+   Chrome profile. All Reddit-targeting CSS is based on well-known,
    publicly documented facts about Reddit's markup (old Reddit's stable
    class names; new Reddit's shreddit/Shadow-DOM architecture), **not**
-   on live inspection. The extension has never been sideloaded into a
-   real Chrome profile and pointed at Reddit. This remains the single
-   most important open item — see `docs/extension-reddit-notes.md` for
-   exactly how to verify it yourself (it's a 5-minute manual check).
-2. **No visual screenshot of the demo site.** Same tooling blockage as
-   above — attempted against both localhost and the live Pages URL, in
-   both the built-in pane and Claude-in-Chrome, across two separate
-   attempts in this session. The demo site's correctness rests on
-   passing typecheck/tests/build (and a working CI deploy), not a visual
-   check. Run `npm run dev -w aeroreddit-demo` and open it yourself, or
-   visit the live URL.
-3. **Firefox support**: not started — explicitly deferred by the
-   maintainer's own priority order.
+   on live inspection. This remains the single most important open item
+   — see `docs/extension-reddit-notes.md` for the 5-minute manual check
+   the maintainer needs to do.
+2. ~~No visual screenshot of the demo site.~~ **Resolved 2026-10-26**:
+   the built-in browser pane recovered and was used to screenshot the
+   local dev server after the gloss/streak/droplet polish pass — see
+   the demo-site entry above.
+3. **AeroFox built but not loaded into real Firefox.** `web-ext lint`
+   and the unit tests pass, and `web-ext build` produces a valid zip,
+   but `web-ext run` (which actually launches Firefox with the add-on
+   loaded) needs a Firefox binary that wasn't available in this sandbox.
+   See `docs/firefox-theme-notes.md` for the exact verification steps.
 4. **No CI lint/test workflow**: skipped per explicit maintainer
    instruction (local checks only).
-5. **No extension icons**: the manifest has no `icons` field, so Chrome
-   shows a default puzzle-piece icon. Generating real PNGs needs either a
-   browser (unavailable) or a native image-encoding dependency, which
-   isn't worth adding for a cosmetic default-icon fallback. Deferred.
-6. **No Playwright / E2E tests**: only Vitest unit/component tests exist.
+5. **No Playwright / E2E tests**: only Vitest unit/component tests exist.
    Given (1), E2E tests against fixture HTML would test fixtures, not
    reality, so this was deprioritized in favor of being honest about (1)
    rather than producing tests that look more thorough than they are.
 
 ## Next steps, in priority order
 
-1. **Sideload-test on real Reddit** (see `docs/extension-reddit-notes.md`
-   step-by-step) — the highest-value remaining task, and the one this
-   session could not complete due to browser-tool unavailability (see
-   Known limitations above). This needs either a working browser tool in
-   a future session, or the maintainer doing the 5-minute manual check.
-2. Take a real screenshot/recording of the live demo site for the README
-   — same blocker.
-3. Gather community feedback (the original Phase-1 goal, still open).
-4. Everything else in `docs/roadmap.md` Phase 2/3 (icons, Firefox).
+1. **Maintainer: sideload-test AeroReddit on real Reddit**
+   (`docs/extension-reddit-notes.md`) and **AeroFox in real Firefox**
+   (`docs/firefox-theme-notes.md`) — both need a human at a real
+   browser profile; confirmed not automatable from this sandbox (see
+   Known limitations above).
+2. Gather community feedback on both (the original Phase-1 goal, still
+   open).
+3. Decide on store submission (Chrome Web Store / Firefox AMO / Edge
+   Add-ons) — maintainer's own action, not started without explicit
+   approval.
+4. Everything else in `docs/roadmap.md` Phase 2/3.
 
 ## How to resume if this session is interrupted
 

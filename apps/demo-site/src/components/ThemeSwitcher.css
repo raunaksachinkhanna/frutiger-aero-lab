@@ -32,11 +32,11 @@
 
 .theme-switcher__pill[data-selected='true'] {
   background:
-    var(--aero-gloss),
+    var(--aero-gloss), var(--aero-light-streak),
     linear-gradient(180deg, var(--aero-accent), var(--aero-accent-strong));
   color: #fff;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
-  box-shadow: var(--aero-shadow), var(--aero-bevel);
+  box-shadow: var(--aero-shadow), var(--aero-glow), var(--aero-bevel);
 }
 
 .theme-switcher__dot {

@@ -2,15 +2,17 @@
 
 This is a monorepo. `apps/lab-site` is the original placeholder/portfolio
 page; `apps/extension` and `apps/demo-site` are AeroReddit, the first
-chosen product direction (see `roadmap.md`).
+chosen product direction; `apps/firefox-theme` is AeroFox, a Firefox
+native browser theme (see `roadmap.md`).
 
 ## Monorepo layout
 
 ```
 apps/
-  lab-site/      The Frutiger Aero Lab landing page (Phase 0 placeholder)
-  extension/     AeroReddit: MV3 Chrome extension (content script, popup, options)
-  demo-site/     AeroReddit: interactive public showcase (fictional sample content)
+  lab-site/       The Frutiger Aero Lab landing page (Phase 0 placeholder)
+  extension/      AeroReddit: MV3 Chrome extension (content script, popup, options)
+  demo-site/      AeroReddit: interactive public showcase (fictional sample content)
+  firefox-theme/  AeroFox: Firefox native browser theme add-on (theme.update() API)
 packages/
   aero-theme/    Shared theme tokens/CSS (Vista Glass, Frutiger Eco, Dark Aero)
                  and the AeroSettings schema, consumed by extension + demo-site
@@ -86,6 +88,19 @@ of elements with `animation: … infinite` — no `requestAnimationFrame`
 loop to manage, pause, or leak. `pointer-events: none` throughout so it
 can never intercept a click meant for the underlying page.
 `prefers-reduced-motion: reduce` removes it entirely.
+
+### AeroFox: a different mechanism, same shared palette
+
+`apps/firefox-theme` doesn't inject CSS into page content at all — it
+uses Firefox's native `browser.theme.update()` API to recolor the
+browser's own chrome (toolbar, tabs, frame, popups). It has no build
+step (plain `background.js`/`popup.js`, linted and packaged with
+Mozilla's own `web-ext` CLI) and doesn't depend on `packages/aero-theme`
+directly, since the theme API takes solid colors, not CSS custom
+properties or gradients — `apps/firefox-theme/colors.js` hand-picks
+solid-color approximations of the same three palettes instead. See
+`docs/firefox-theme-notes.md` for the full rationale and what's still
+unverified.
 
 ## Deployment
 

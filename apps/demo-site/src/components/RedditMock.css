@@ -143,19 +143,33 @@
 
 /* === AeroReddit theming (what the extension actually produces) === */
 .reddit-mock--aero {
-  background: var(--aero-bg-gradient);
+  background:
+    var(--aero-droplet),
+    var(--aero-droplet),
+    var(--aero-bg-gradient);
+  background-position:
+    10% 15%,
+    90% 80%,
+    0 0;
+  background-repeat: no-repeat;
+  background-size:
+    56px 56px,
+    80px 80px,
+    auto;
   color: var(--aero-text);
   padding: 16px;
   border-radius: var(--aero-radius-lg);
   font-family: inherit;
   transition: background 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .reddit-mock--aero .reddit-mock__nav {
-  background: var(--aero-gloss), var(--aero-surface-bg-strong);
+  background: var(--aero-gloss), var(--aero-light-streak), var(--aero-surface-bg-strong);
   border: 1px solid var(--aero-surface-border);
   border-radius: var(--aero-radius-md);
-  box-shadow: var(--aero-shadow), var(--aero-bevel);
+  box-shadow: var(--aero-shadow), var(--aero-glow), var(--aero-bevel);
   backdrop-filter: blur(var(--aero-blur));
   -webkit-backdrop-filter: blur(var(--aero-blur));
 }
@@ -177,16 +191,35 @@
 }
 
 .reddit-mock--aero .reddit-mock__post {
-  background: var(--aero-gloss), var(--aero-surface-bg);
+  position: relative;
+  overflow: hidden;
+  background: var(--aero-gloss), var(--aero-light-streak), var(--aero-surface-bg);
   border: 1px solid var(--aero-surface-border);
   border-radius: var(--aero-radius-md);
   box-shadow: var(--aero-shadow), var(--aero-bevel);
   backdrop-filter: blur(calc(var(--aero-blur) * 0.6));
   -webkit-backdrop-filter: blur(calc(var(--aero-blur) * 0.6));
-  transition: transform 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.reddit-mock--aero .reddit-mock__post::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--aero-light-streak);
+  opacity: 0.7;
+  transform: translateX(-35%);
+  transition: transform 0.35s ease;
+}
+.reddit-mock--aero .reddit-mock__post:hover::before {
+  transform: translateX(35%);
 }
 .reddit-mock--aero .reddit-mock__post:hover {
   transform: translateY(-2px);
+  box-shadow: var(--aero-shadow-lifted), var(--aero-glow), var(--aero-bevel);
 }
 
 .reddit-mock--aero .reddit-mock__vote {

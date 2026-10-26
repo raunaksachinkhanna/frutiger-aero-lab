@@ -53,7 +53,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, var(--aero-accent), var(--aero-accent-strong));
+  background:
+    var(--aero-light-streak),
+    linear-gradient(180deg, var(--aero-accent), var(--aero-accent-strong));
+  box-shadow: var(--aero-glow);
   color: #fff;
   font-weight: 700;
   font-size: 0.85rem;
