@@ -32,6 +32,20 @@ export const THEME_IMAGES = {
   'media-green': 'images/media-green-frame.png',
 }
 
+/**
+ * A pseudo-theme-id, stored and selectable like a real theme but resolved
+ * to a concrete one at apply-time based on the OS color scheme. Kept out
+ * of THEME_IDS deliberately — it has no color map or image of its own.
+ */
+export const AUTO_THEME_ID = 'auto'
+export const AUTO_META = { name: 'Auto', swatch: '#8fb8e0' }
+const AUTO_LIGHT_THEME_ID = 'vista-glass'
+const AUTO_DARK_THEME_ID = 'dark-aero'
+
+export function resolveAutoThemeId(prefersDark) {
+  return prefersDark ? AUTO_DARK_THEME_ID : AUTO_LIGHT_THEME_ID
+}
+
 export const FIREFOX_THEME_COLORS = {
   'vista-glass': {
     frame: '#4fb3f0',

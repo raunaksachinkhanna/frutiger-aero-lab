@@ -3,11 +3,13 @@ import assert from 'node:assert/strict'
 import { existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import {
+  AUTO_THEME_ID,
   DEFAULT_THEME_ID,
   FIREFOX_THEME_COLORS,
   THEME_IDS,
   THEME_IMAGES,
   THEME_META,
+  resolveAutoThemeId,
 } from './colors.js'
 
 const here = fileURLToPath(new URL('.', import.meta.url))
@@ -52,4 +54,14 @@ test('every theme id has a theme_frame image that exists on disk', () => {
     assert.ok(relativePath, `missing theme_frame image for ${id}`)
     assert.ok(existsSync(`${here}${relativePath}`), `${relativePath} does not exist`)
   }
+})
+
+test('the auto theme id is kept separate from the real theme ids', () => {
+  assert.ok(!THEME_IDS.includes(AUTO_THEME_ID), 'auto should not be a selectable concrete theme')
+})
+
+test('resolveAutoThemeId picks a real theme for both color schemes', () => {
+  assert.ok(THEME_IDS.includes(resolveAutoThemeId(true)), 'dark-scheme result should be a real theme')
+  assert.ok(THEME_IDS.includes(resolveAutoThemeId(false)), 'light-scheme result should be a real theme')
+  assert.notEqual(resolveAutoThemeId(true), resolveAutoThemeId(false))
 })

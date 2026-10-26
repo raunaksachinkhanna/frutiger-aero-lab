@@ -66,6 +66,25 @@ available in the sandbox this was built in.
    trip).
 4. Update this file and `PROGRESS.md` with what you actually found.
 
+## The "Auto" option
+
+`AUTO_THEME_ID` (`'auto'`) is a pseudo-theme-id, selectable in the popup
+and stored in `browser.storage.local` just like a real theme id, but it
+has no color map or image of its own — it's deliberately kept out of
+`THEME_IDS`. `background.js` resolves it at apply-time via
+`resolveAutoThemeId(prefersDark)` (a pure function in `colors.js`, easy
+to unit test without mocking `matchMedia`) to Vista Glass (light) or Dark
+Aero (dark), based on `matchMedia('(prefers-color-scheme: dark)')`.
+
+Firefox background scripts (unlike Chrome's MV3 service workers) run in
+a real hidden-page context, so `matchMedia` is available directly — no
+content-script relay needed. A `change` listener on that media query
+re-applies the theme automatically when the OS scheme flips, but only if
+the currently stored choice is still `'auto'` (so a manually-picked theme
+is never silently overridden by an OS theme change). This part — the
+live OS-scheme-change reaction — can only be confirmed in a real Firefox
+profile; see the verification steps above.
+
 ## Updating colors
 
 `colors.js` is the single source of truth. To add or adjust a theme:
