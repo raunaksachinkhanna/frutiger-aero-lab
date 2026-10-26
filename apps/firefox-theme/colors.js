@@ -17,6 +17,21 @@ export const THEME_META = {
   'media-green': { name: 'Media Center', swatch: '#39ff8c' },
 }
 
+/**
+ * A translucent glossy/accent-glow PNG laid over the solid toolbar color via
+ * theme.images.theme_frame — real texture instead of a flat color, without
+ * touching page content. Firefox aligns theme_frame top-right, no-repeat, by
+ * default, so these are wide (1200x200) with the highlight concentrated on
+ * the right side.
+ */
+export const THEME_IMAGES = {
+  'vista-glass': 'images/vista-glass-frame.png',
+  'frutiger-eco': 'images/frutiger-eco-frame.png',
+  'dark-aero': 'images/dark-aero-frame.png',
+  'royale-noir': 'images/royale-noir-frame.png',
+  'media-green': 'images/media-green-frame.png',
+}
+
 export const FIREFOX_THEME_COLORS = {
   'vista-glass': {
     frame: '#4fb3f0',

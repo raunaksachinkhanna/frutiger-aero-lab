@@ -20,6 +20,18 @@ or `color-mix()`. `colors.js` hand-picks solid colors per theme that
 visually approximate the original Vista Glass / Frutiger Eco / Dark Aero
 gradients as closely as a flat-color API allows.
 
+### Real texture via `theme.images.theme_frame`
+
+To get actual gloss/texture rather than a flat color, each theme also
+sets `images.theme_frame` — a translucent PNG (`images/<id>-frame.png`,
+generated from an SVG template) layered over the solid toolbar color.
+Firefox positions it top-right, no-repeat, by default, so the images are
+wide (1200×200) with the highlight concentrated on the right side and
+mostly-transparent elsewhere, so the solid colors still show through.
+`THEME_IMAGES` in `colors.js` maps each theme id to its image path, and
+`background.js`'s `applyTheme()` passes it alongside `colors` on every
+`browser.theme.update()` call.
+
 ## Why build this instead of (or alongside) a classic Firefox Aero skin
 
 A handful of static Frutiger-Aero-styled Firefox themes already exist in

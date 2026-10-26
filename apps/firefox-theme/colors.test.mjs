@@ -1,6 +1,16 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { DEFAULT_THEME_ID, FIREFOX_THEME_COLORS, THEME_IDS, THEME_META } from './colors.js'
+import { existsSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import {
+  DEFAULT_THEME_ID,
+  FIREFOX_THEME_COLORS,
+  THEME_IDS,
+  THEME_IMAGES,
+  THEME_META,
+} from './colors.js'
+
+const here = fileURLToPath(new URL('.', import.meta.url))
 
 const REQUIRED_FIELDS = [
   'frame',
@@ -34,4 +44,12 @@ test('every theme id has display metadata', () => {
 
 test('the default theme id is a real theme', () => {
   assert.ok(THEME_IDS.includes(DEFAULT_THEME_ID))
+})
+
+test('every theme id has a theme_frame image that exists on disk', () => {
+  for (const id of THEME_IDS) {
+    const relativePath = THEME_IMAGES[id]
+    assert.ok(relativePath, `missing theme_frame image for ${id}`)
+    assert.ok(existsSync(`${here}${relativePath}`), `${relativePath} does not exist`)
+  }
 })
