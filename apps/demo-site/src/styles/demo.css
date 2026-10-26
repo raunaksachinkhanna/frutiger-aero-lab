@@ -47,10 +47,10 @@ a {
 }
 
 .aero-glass-surface {
-  background: var(--aero-surface-bg);
+  background: var(--aero-gloss), var(--aero-surface-bg);
   border: 1px solid var(--aero-surface-border);
   border-radius: var(--aero-radius-lg);
-  box-shadow: var(--aero-shadow);
+  box-shadow: var(--aero-shadow), var(--aero-bevel);
   backdrop-filter: blur(var(--aero-blur));
   -webkit-backdrop-filter: blur(var(--aero-blur));
 }

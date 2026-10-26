@@ -31,9 +31,12 @@
 }
 
 .theme-switcher__pill[data-selected='true'] {
-  background: linear-gradient(180deg, var(--aero-accent), var(--aero-accent-strong));
+  background:
+    var(--aero-gloss),
+    linear-gradient(180deg, var(--aero-accent), var(--aero-accent-strong));
   color: #fff;
-  box-shadow: var(--aero-shadow);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--aero-shadow), var(--aero-bevel);
 }
 
 .theme-switcher__dot {

@@ -152,10 +152,10 @@
 }
 
 .reddit-mock--aero .reddit-mock__nav {
-  background: var(--aero-surface-bg-strong);
+  background: var(--aero-gloss), var(--aero-surface-bg-strong);
   border: 1px solid var(--aero-surface-border);
   border-radius: var(--aero-radius-md);
-  box-shadow: var(--aero-shadow);
+  box-shadow: var(--aero-shadow), var(--aero-bevel);
   backdrop-filter: blur(var(--aero-blur));
   -webkit-backdrop-filter: blur(var(--aero-blur));
 }
@@ -177,10 +177,10 @@
 }
 
 .reddit-mock--aero .reddit-mock__post {
-  background: var(--aero-surface-bg);
+  background: var(--aero-gloss), var(--aero-surface-bg);
   border: 1px solid var(--aero-surface-border);
   border-radius: var(--aero-radius-md);
-  box-shadow: var(--aero-shadow);
+  box-shadow: var(--aero-shadow), var(--aero-bevel);
   backdrop-filter: blur(calc(var(--aero-blur) * 0.6));
   -webkit-backdrop-filter: blur(calc(var(--aero-blur) * 0.6));
   transition: transform 0.15s ease;

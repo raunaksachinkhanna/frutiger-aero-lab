@@ -11,15 +11,17 @@ html[data-aero-site='old'] body {
 }
 
 html[data-aero-site='old'] #header {
-  background: color-mix(
-    in srgb,
-    var(--aero-surface-bg-strong) calc(var(--aero-opacity-scale, 1) * 100%),
-    transparent
-  ) !important;
+  background:
+    var(--aero-gloss),
+    color-mix(
+      in srgb,
+      var(--aero-surface-bg-strong) calc(var(--aero-opacity-scale, 1) * 100%),
+      transparent
+    ) !important;
   backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1)));
   -webkit-backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1)));
   border-bottom: 1px solid var(--aero-surface-border) !important;
-  box-shadow: var(--aero-shadow) !important;
+  box-shadow: var(--aero-shadow), var(--aero-bevel) !important;
 }
 
 html[data-aero-site='old'] #header-bottom-left .tabmenu li a {
@@ -37,18 +39,27 @@ html[data-aero-site='old'] .content {
 }
 
 html[data-aero-site='old'] .thing {
-  background: color-mix(
-    in srgb,
-    var(--aero-surface-bg) calc(var(--aero-opacity-scale, 1) * 100%),
-    transparent
-  ) !important;
+  background:
+    var(--aero-gloss),
+    color-mix(
+      in srgb,
+      var(--aero-surface-bg) calc(var(--aero-opacity-scale, 1) * 100%),
+      transparent
+    ) !important;
   border: 1px solid var(--aero-surface-border) !important;
   border-radius: var(--aero-radius-md) !important;
-  box-shadow: var(--aero-shadow);
+  box-shadow: var(--aero-shadow), var(--aero-bevel);
   backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1) * 0.6));
   -webkit-backdrop-filter: blur(calc(var(--aero-blur) * var(--aero-blur-scale, 1) * 0.6));
-  margin-bottom: 0.5em !important;
-  transition: transform 0.15s ease;
+  margin-bottom: 0.6em !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+html[data-aero-site='old'] .thing:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--aero-shadow-lifted), var(--aero-bevel);
 }
 
 html[data-aero-site='old'][data-aero-density='compact'] .thing {
@@ -77,10 +88,10 @@ html[data-aero-site='old'] .midcol .score.dislikes {
 
 html[data-aero-site='old'] .side .spacer .titlebox,
 html[data-aero-site='old'] .side .spacer {
-  background: var(--aero-surface-bg) !important;
+  background: var(--aero-gloss), var(--aero-surface-bg) !important;
   border: 1px solid var(--aero-surface-border) !important;
   border-radius: var(--aero-radius-md) !important;
-  box-shadow: var(--aero-shadow);
+  box-shadow: var(--aero-shadow), var(--aero-bevel);
 }
 
 html[data-aero-site='old'] .commentarea .comment {
@@ -105,15 +116,22 @@ html[data-aero-site='old'] .btn,
 html[data-aero-site='old'] button.btn,
 html[data-aero-site='old'] .styled-button,
 html[data-aero-site='old'] input[type='submit'] {
-  background: linear-gradient(
-    180deg,
-    var(--aero-accent) 0%,
-    var(--aero-accent-strong) 100%
-  ) !important;
+  background:
+    var(--aero-gloss),
+    linear-gradient(180deg, var(--aero-accent) 0%, var(--aero-accent-strong) 100%) !important;
   color: #fff !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   border: none !important;
-  border-radius: var(--aero-radius-sm) !important;
-  box-shadow: var(--aero-shadow);
+  border-radius: var(--aero-radius-pill, 999px) !important;
+  box-shadow: var(--aero-shadow), var(--aero-bevel);
+  transition: transform 0.1s ease;
+}
+
+html[data-aero-site='old'] .btn:active,
+html[data-aero-site='old'] button.btn:active,
+html[data-aero-site='old'] .styled-button:active,
+html[data-aero-site='old'] input[type='submit']:active {
+  transform: translateY(1px);
 }
 
 html[data-aero-site='old'] ::-webkit-scrollbar {

@@ -1,23 +1,31 @@
 /* Dark Aero — deep ocean blues, glowing cyan accents, restrained neon */
 [data-aero-theme='dark-aero'] {
-  --aero-bg-gradient: linear-gradient(180deg, #06111f 0%, #0a1f33 55%, #07263a 100%);
+  --aero-bg-gradient: linear-gradient(180deg, #030a14 0%, #06283f 50%, #084a63 100%);
   --aero-surface-bg: rgba(18, 36, 54, 0.55);
   --aero-surface-bg-strong: rgba(22, 44, 64, 0.72);
-  --aero-surface-border: rgba(120, 220, 255, 0.28);
-  --aero-surface-highlight: rgba(140, 230, 255, 0.18);
+  --aero-surface-border: rgba(120, 230, 255, 0.32);
+  --aero-surface-highlight: rgba(140, 230, 255, 0.22);
   --aero-blur: 20px;
-  --aero-accent: #39d6ff;
+  --aero-accent: #00e5ff;
   --aero-accent-strong: #0ea5c7;
   --aero-accent-2: #6ae8b8;
   --aero-text: #e7f6ff;
   --aero-text-muted: #94b4c4;
-  --aero-link: #39d6ff;
-  --aero-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  --aero-shadow-lifted: 0 20px 54px rgba(0, 0, 0, 0.55);
+  --aero-link: #00e5ff;
+  --aero-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 229, 255, 0.12);
+  --aero-shadow-lifted: 0 20px 54px rgba(0, 0, 0, 0.55), 0 0 36px rgba(0, 229, 255, 0.18);
   --aero-radius-sm: 8px;
   --aero-radius-md: 14px;
   --aero-radius-lg: 22px;
   --aero-upvote: #ff6a3d;
   --aero-downvote: #6ae8ff;
-  --aero-scrollbar-thumb: linear-gradient(180deg, #39d6ff, #0ea5c7);
+  --aero-scrollbar-thumb: linear-gradient(180deg, #00e5ff, #0ea5c7);
+  --aero-gloss: linear-gradient(
+    180deg,
+    rgba(180, 245, 255, 0.35) 0%,
+    rgba(180, 245, 255, 0.1) 45%,
+    rgba(180, 245, 255, 0) 55%
+  );
+  --aero-bevel:
+    inset 0 1px 0 rgba(180, 245, 255, 0.4), inset 0 -2px 6px rgba(0, 0, 0, 0.5);
 }

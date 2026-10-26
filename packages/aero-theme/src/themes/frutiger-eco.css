@@ -1,23 +1,38 @@
 /* Frutiger Eco — vibrant green/blue, nature-inspired, bright and playful */
 [data-aero-theme='frutiger-eco'] {
-  --aero-bg-gradient: linear-gradient(180deg, #d7f3e3 0%, #eafcf0 40%, #d8f0fb 100%);
+  --aero-bg-gradient: linear-gradient(
+    180deg,
+    #2fd68a 0%,
+    #b9f3d3 40%,
+    #d6f6ff 75%,
+    #a9e4fb 100%
+  );
   --aero-surface-bg: rgba(255, 255, 255, 0.42);
   --aero-surface-bg-strong: rgba(255, 255, 255, 0.64);
-  --aero-surface-border: rgba(255, 255, 255, 0.85);
+  --aero-surface-border: rgba(255, 255, 255, 0.88);
   --aero-surface-highlight: rgba(255, 255, 255, 0.95);
   --aero-blur: 14px;
-  --aero-accent: #2fb872;
-  --aero-accent-strong: #0e7a4f;
-  --aero-accent-2: #1f8fe0;
+  --aero-accent: #14c472;
+  --aero-accent-strong: #0a8a4e;
+  --aero-accent-2: #22a8f0;
   --aero-text: #0c2a1c;
   --aero-text-muted: #3f6b55;
-  --aero-link: #0e7a4f;
+  --aero-link: #0a8a4e;
   --aero-shadow: 0 10px 26px rgba(14, 122, 79, 0.2);
   --aero-shadow-lifted: 0 18px 44px rgba(14, 122, 79, 0.28);
   --aero-radius-sm: 10px;
   --aero-radius-md: 16px;
   --aero-radius-lg: 26px;
-  --aero-upvote: #2fb872;
+  --aero-upvote: #14c472;
   --aero-downvote: #e0607c;
-  --aero-scrollbar-thumb: linear-gradient(180deg, #9be8be, #2fb872);
+  --aero-scrollbar-thumb: linear-gradient(180deg, #9be8be, #14c472);
+  --aero-gloss: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.4) 45%,
+    rgba(255, 255, 255, 0.05) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --aero-bevel:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -2px 4px rgba(14, 122, 79, 0.15);
 }
